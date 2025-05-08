@@ -35,12 +35,12 @@ if (isset($_SESSION['username'])) {
 
                                         <div data-mdb-input-init class="form-outline mb-4">
                                             <label class="form-label">Usuario:</label>
-                                            <input type="email" id="" class="form-control form-control-lg" />
+                                            <input type="email" id="" class="form-control form-control-lg" required/>
                                         </div>
 
                                         <div data-mdb-input-init class="form-outline mb-4">
                                             <label class="form-label" >Senha:</label>
-                                            <input type="password" class="form-control form-control-lg" />
+                                            <input type="password" class="form-control form-control-lg" required/>
                                         </div>
 
                                         <div class="pt-1 mb-4">
