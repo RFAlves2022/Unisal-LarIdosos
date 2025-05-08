@@ -10,10 +10,32 @@
     <title>Teste dashboard</title>
 </head>
 
-<body>
-    <header>
-        <nav>
+<body class="bgColor4">
+    <header class="container-fluid bgColor2">
+        <nav class="navbar navbar-expand-lg navbar-light bgColor2">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="dashboard.php">
+                    <img src="img/abstract-icon.png" alt="Logo" width="50" height="50">Logo
+                </a>
 
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" id="userDropdown"
+                            role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <img src="img/avatar-generic.png" alt="Avatar" class="rounded-circle" height="35"
+                                loading="lazy">
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
+                            <li><a class="dropdown-item" href="#">Meu Perfil</a></li>
+                            <li><a class="dropdown-item" href="#">Configurações</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item" href="#">Sair</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
         </nav>
     </header>
     <!--End header-->
@@ -22,17 +44,21 @@
         <div class="container">
             <div class="row justify-content-center mt-5">
                 <div class="col-md-8">
-
+                        <h1>232</h1>
                 </div>
             </div>
         </div>
     </main>
 
     <!--Footer-->
-    <footer>
-
+    <footer class="bg-light text-center text-lg-start mt-5 fixed-bottom">
+        <div class="text-center p-3 text-muted" style="background-color: #f8f9fa;">
+            ©
+        <!--<?php echo date("Y"); ?>-->Lar de Idosos - Todos os direitos reservados.
+        </div>
     </footer>
 
+    <!-- Scripts do Bootstrap -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 

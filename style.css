@@ -1,4 +1,15 @@
-.gradient-custom-2 {
-    background: linear-gradient(135deg, #a8edea, #98f9b8); /* tons verde-água */
-    color: #000;
+.bgColor1 {
+    background-color: #5D737E;
+}
+.bgColor2 {
+    background-color: #64B6AC;
+}
+.bgColor3 {
+    background-color: #C0FDFb;
+}
+.bgColor4 {
+    background-color: #DAFFEF;
+}
+.bgColor5 {
+    background-color: #FCFFFD;
 }
