@@ -6,60 +6,242 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="icon" href="img/abstract-icon.png" type="image/png">
+    <link rel="icon" href="img/logotipo-kairos.png" type="image/png">
     <title>Teste dashboard</title>
 </head>
 
-<body class="bgColor4">
-    <header class="container-fluid bgColor2">
-        <nav class="navbar navbar-expand-lg navbar-light bgColor2">
+<body>
+    <header class="shadow-sm sticky-top bg-white">
+        <nav class="navbar navbar-expand-lg navbar-light px-4">
             <div class="container-fluid">
-                <a class="navbar-brand" href="dashboard.php">
-                    <img src="img/abstract-icon.png" alt="Logo" width="50" height="50">Logo
+                <!-- Logo -->
+                <a class="navbar-brand d-flex align-items-center gap-2" href="dashboard.php">
+                    <img src="img/logotipo-kairos.png" alt="Logo" width="40" height="40" class="rounded-circle">
+                    <span class="fw-bold fs-5" style="color: #5D737E;">Kairos</span>
+                    <label class="text-muted fs-6">Casa de repouso</label>
                 </a>
 
+                <!-- Perfil -->
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" id="userDropdown"
                             role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            <img src="img/avatar-generic.png" alt="Avatar" class="rounded-circle" height="35"
-                                loading="lazy">
+                            <img src="img/avatar-generic.png" alt="Avatar" class="rounded-circle shadow-sm me-2"
+                                height="35" width="35">
+                            <span class="d-none d-md-inline fw-medium">
+                                <!-- <?php echo isset($_SESSION['usuario_nome']) ? htmlspecialchars($_SESSION['usuario_nome']) : 'Usuário'; ?> -->
+                            </span>
                         </a>
-                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
-                            <li><a class="dropdown-item" href="#">Meu Perfil</a></li>
-                            <li><a class="dropdown-item" href="#">Configurações</a></li>
+                        <ul class="dropdown-menu dropdown-menu-end shadow" aria-labelledby="userDropdown">
+                            <li><a class="dropdown-item" href="#">👤 Meu Perfil</a></li>
+                            <li><a class="dropdown-item" href="#">⚙️ Configurações</a></li>
                             <li>
                                 <hr class="dropdown-divider">
                             </li>
-                            <li><a class="dropdown-item" href="#">Sair</a></li>
+                            <li><a class="dropdown-item text-danger" href="logout.php">🚪 Sair</a></li>
                         </ul>
                     </li>
                 </ul>
             </div>
         </nav>
     </header>
+
     <!--End header-->
 
-    <main>
-        <div class="container">
-            <div class="row justify-content-center mt-5">
-                <div class="col-md-8">
-                        <h1>232</h1>
+    <body>
+        <main>
+            <div class="container text-center mt-4 mb-3">
+                <div class="row justify-content-center g-4">
+
+                    <div class="col-4 col-md-2">
+                        <a href="#" class="text-decoration-none text-dark">
+                            <div class="circle-link mx-auto">
+                                <img src="img/residentes-icon.png" alt="Ícone 1" class="circle-img">
+                            </div>
+                            <p class="mt-2">Residentes</p>
+                        </a>
+                    </div>
+
+                    <div class="col-4 col-md-2">
+                        <a href="#" class="text-decoration-none text-dark">
+                            <div class="circle-link mx-auto">
+                                <img src="img/Consulta-icon.png" alt="Ícone 2" class="circle-img">
+                            </div>
+                            <p class="mt-2">Consultas</p>
+                        </a>
+                    </div>
+
+                    <div class="col-4 col-md-2">
+                        <a href="#" class="text-decoration-none text-dark">
+                            <div class="circle-link mx-auto">
+                                <img src="img/medicacao-icon.png" alt="Ícone 3" class="circle-img">
+                            </div>
+                            <p class="mt-2">Medicamentos</p>
+                        </a>
+                    </div>
+
                 </div>
             </div>
-        </div>
-    </main>
+            <div class="container-lg mt-2 mb-5">
+                <div class="row justify-content-center">
+                    <!-- TABELA CONSULTAS -->
+                    <div class="col-md-6 mb-4">
+                        <div class="card bg-white shadow-sm rounded-lg">
+                            <div class="card-body">
+                                <h4 class="mb-3 text-center"style="color: #5D737E;">Consultas do dia</h4>
+                                <div class="table-responsive table-rounded">
+                                    <table class="table table-bordered table-striped mb-0">
+                                        <thead class="table-light">
+                                            <tr>
+                                                <th scope="col">Hora</th>
+                                                <th scope="col">Paciente</th>
+                                                <th scope="col">Médico</th>
+                                                <th scope="col">Status</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>08:00</td>
+                                                <td>João Silva</td>
+                                                <td>Dr. Carlos</td>
+                                                <td><span class="badge bg-success">Confirmada</span></td>
+                                            </tr>
+                                            <tr>
+                                                <td>09:30</td>
+                                                <td>Ana Souza</td>
+                                                <td>Dr. Maria</td>
+                                                <td><span class="badge bg-warning text-dark">Pendente</span></td>
+                                            </tr>
+                                            <tr>
+                                                <td>11:00</td>
+                                                <td>Pedro Santos</td>
+                                                <td>Dr. João</td>
+                                                <td><span class="badge bg-danger">Cancelada</span></td>
+                                            </tr>
+                                            <tr>
+                                                <td>14:00</td>
+                                                <td>Lucas Oliveira</td>
+                                                <td>Dr. Ana</td>
+                                                <td><span class="badge bg-success">Confirmada</span></td>
+                                            </tr>
+                                            <tr>
+                                                <td>15:30</td>
+                                                <td>Mariana Lima</td>
+                                                <td>Dr. Carlos</td>
+                                                <td><span class="badge bg-success">Confirmada</span></td>
+                                            </tr>
+                                            <tr>
+                                                <td>16:45</td>
+                                                <td>Felipe Alves</td>
+                                                <td>Dr. Maria</td>
+                                                <td><span class="badge bg-warning text-dark">Pendente</span></td>
+                                            </tr>
+                                            <tr>
+                                                <td>17:30</td>
+                                                <td>Beatriz Rocha</td>
+                                                <td>Dr. João</td>
+                                                <td><span class="badge bg-success">Confirmada</span></td>
+                                            </tr>
+                                            <tr>
+                                                <td>18:00</td>
+                                                <td>Rafael Mendes</td>
+                                                <td>Dr. Ana</td>
+                                                <td><span class="badge bg-danger">Cancelada</span></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
-    <!--Footer-->
-    <footer class="bg-light text-center text-lg-start mt-5 fixed-bottom">
-        <div class="text-center p-3 text-muted" style="background-color: #f8f9fa;">
-            ©
-        <!--<?php echo date("Y"); ?>-->Lar de Idosos - Todos os direitos reservados.
-        </div>
-    </footer>
+                    <!-- TABELA MEDICAMENTOS -->
+                    <div class="col-md-6 mb-4">
+                        <div class="card bg-white shadow-sm rounded-lg">
+                            <div class="card-body">
+                                <h4 class="mb-3 text-center"style="color: #5D737E;">Rotina de Medicamentos</h4>
+                                <div class="table-responsive table-rounded">
+                                    <table class="table table-bordered table-striped mb-0">
+                                        <thead class="table-light">
+                                            <tr>
+                                                <th>Horário</th>
+                                                <th>Medicação</th>
+                                                <th>Dosagem</th>
+                                                <th>Paciente</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>08:00</td>
+                                                <td>Paracetamol</td>
+                                                <td>500mg</td>
+                                                <td>João Silva</td>
+                                            </tr>
+                                            <tr>
+                                                <td>10:00</td>
+                                                <td>Amoxicilina</td>
+                                                <td>250mg</td>
+                                                <td>Ana Souza</td>
+                                            </tr>
+                                            <tr>
+                                                <td>12:30</td>
+                                                <td>Dipirona</td>
+                                                <td>1g</td>
+                                                <td>Pedro Santos</td>
+                                            </tr>
+                                            <tr>
+                                                <td>15:00</td>
+                                                <td>Losartana</td>
+                                                <td>50mg</td>
+                                                <td>Lucas Oliveira</td>
+                                            </tr>
+                                            <tr>
+                                                <td>16:00</td>
+                                                <td>Ibuprofeno</td>
+                                                <td>400mg</td>
+                                                <td>Mariana Lima</td>
+                                            </tr>
+                                            <tr>
+                                                <td>17:15</td>
+                                                <td>Metformina</td>
+                                                <td>850mg</td>
+                                                <td>Felipe Alves</td>
+                                            </tr>
+                                            <tr>
+                                                <td>18:45</td>
+                                                <td>Omeprazol</td>
+                                                <td>20mg</td>
+                                                <td>Beatriz Rocha</td>
+                                            </tr>
+                                            <tr>
+                                                <td>19:30</td>
+                                                <td>Simvastatina</td>
+                                                <td>40mg</td>
+                                                <td>Rafael Mendes</td>
+                                            </tr>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
-    <!-- Scripts do Bootstrap -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-</body>
+                </div>
+            </div>
+        </main>
+
+
+        <!--Footer-->
+        <footer class="bg-light text-center text-lg-start mt-5 fixed-bottom">
+            <div class="text-center p-3 text-muted" style="background-color: #f8f9fa;">
+                ©
+                <!--<?php echo date("Y"); ?>-->Logo - Todos os direitos reservados.
+            </div>
+        </footer>
+
+        <!-- Scripts do Bootstrap -->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    </body>
 
 </html>

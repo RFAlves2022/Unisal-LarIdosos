@@ -1,15 +1,69 @@
 .bgColor1 {
     background-color: #5D737E;
 }
+
 .bgColor2 {
     background-color: #64B6AC;
 }
+
 .bgColor3 {
     background-color: #C0FDFb;
 }
+
 .bgColor4 {
     background-color: #DAFFEF;
 }
+
 .bgColor5 {
     background-color: #FCFFFD;
 }
+
+body {
+    background: linear-gradient(to bottom right, #d6f5f2, #eafff7, #ffffff);
+    min-height: 100vh;
+}
+
+.table-rounded table {
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.badge {
+    font-size: 0.9rem;
+    padding: 6px 12px;
+    border-radius: 12px;
+}
+
+.rounded-lg {
+    border-radius: 15px;
+}
+/* Exemplo para .bgColor2 se ainda for usado */
+.bgColor2-faded {
+    background: linear-gradient(135deg, #a1ded1, #c4f2e5);
+}
+
+.navbar-brand span {
+    font-family: 'Segoe UI', sans-serif;
+    letter-spacing: 0.5px;
+}
+.circle-link {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: #f0f0f0;
+      transition: 0.3s;
+    }
+
+    .circle-link:hover {
+      background-color: #d9edf7;
+      transform: scale(1.05);
+    }
+
+    .circle-img {
+      max-width: 60%;
+      max-height: 60%;
+    }
