@@ -7,7 +7,7 @@ include_once "header.php";
         <div class="row justify-content-center g-4">
 
             <div class="col-4 col-md-2">
-                <a href="#" class="text-decoration-none text-dark">
+                <a href="cardResidentes.php" class="text-decoration-none text-dark">
                     <div class="circle-link mx-auto">
                         <img src="img/residentes-icon.png" alt="Ícone 1" class="circle-img">
                     </div>
@@ -16,7 +16,7 @@ include_once "header.php";
             </div>
 
             <div class="col-4 col-md-2">
-                <a href="#" class="text-decoration-none text-dark">
+                <a href="listConsultas.php" class="text-decoration-none text-dark">
                     <div class="circle-link mx-auto">
                         <img src="img/Consulta-icon.png" alt="Ícone 2" class="circle-img">
                     </div>
@@ -25,7 +25,7 @@ include_once "header.php";
             </div>
 
             <div class="col-4 col-md-2">
-                <a href="#" class="text-decoration-none text-dark">
+                <a href="rotinaRemedio.php" class="text-decoration-none text-dark">
                     <div class="circle-link mx-auto">
                         <img src="img/medicacao-icon.png" alt="Ícone 3" class="circle-img">
                     </div>
