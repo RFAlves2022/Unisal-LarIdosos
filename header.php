@@ -1,3 +1,8 @@
+<?php
+include_once "dbConnection.php"; // Conexão com o banco de dados
+include_once "authCheck.php"; // Verifica se o usuário está logado 
+ ?>
+
 <!DOCTYPE html>
 <html lang="PT-BR">
 
@@ -28,9 +33,6 @@
                             role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             <img src="img/avatar-generic.png" alt="Avatar" class="rounded-circle shadow-sm me-2"
                                 height="35" width="35">
-                            <span class="d-none d-md-inline fw-medium">
-                                <!-- <?php echo isset($_SESSION['usuario_nome']) ? htmlspecialchars($_SESSION['usuario_nome']) : 'Usuário'; ?> -->
-                            </span>
                         </a>
                         <ul class="dropdown-menu dropdown-menu-end shadow" aria-labelledby="userDropdown">
                             <li><a class="dropdown-item" href="#">👤 Meu Perfil</a></li>

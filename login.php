@@ -1,4 +1,10 @@
-<?php include_once "dbConnection.php"; ?>
+<?php
+include_once "dbConnection.php"; // Inclui a conexão com o banco
+session_start(); // Inicia a sessão
+require_once "loginValidation.php"; // Inclui a validação de login
+?>
+
+
 
 
 <!DOCTYPE html>
@@ -28,7 +34,10 @@
                                 </div>
                                 <div class="col-md-6 col-lg-7 d-flex align-items-center">
                                     <div class="card-body p-4 p-lg-5 text-black">
-                                        <form>
+                                        <?php if (!empty($erro)): ?>
+                                            <div class="alert alert-danger py-2"><?= $erro ?></div>
+                                        <?php endif; ?>
+                                        <form method="POST">
                                             <div class="d-flex align-items-center mb-3 pb-1">
                                                 <img src="img/logotipo-kairos.png" alt="Logo" width="90" height="90"
                                                     class="me-2">
@@ -40,21 +49,20 @@
 
                                             <div class="form-outline mb-4">
                                                 <label class="form-label">Usuario:</label>
-                                                <input type="email" id="" class="form-control form-control-lg"
+                                                <input type="text" name="username" class="form-control form-control-lg"
                                                     required />
                                             </div>
 
                                             <div class="form-outline mb-4">
                                                 <label class="form-label">Senha:</label>
-                                                <input type="password" class="form-control form-control-lg" required />
+                                                <input type="password" name="password" class="form-control form-control-lg" required />
                                             </div>
 
                                             <div class="pt-1 mb-4">
-                                                <button class="btn btn-lg btn-block text-white" onclick="window.location.href='dashboard.html'" type="button"
+                                                <button class="btn btn-lg btn-block text-white" type="submit"
                                                     style="background-color: #5D737E;">Entrar</button>
                                             </div>
                                             <a class="small text-muted" href="#!">Esqueceu a senha?</a><br>
-                                            <a href="#!" class="small text-muted">Política de privacidade</a>
                                         </form>
                                     </div>
                                 </div>
