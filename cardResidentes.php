@@ -11,6 +11,9 @@ include_once "header.php"
                     <button class="btn my-2 my-sm-0" id="btnSearch">Pesquisar</button>
                 </form>
             </div>
+            <div class="col-2 mt-4">
+                <a href="cadastroResidente.php">Cadastrar novo</a>
+            </div>
         </div>
 
         <div class="row d-flex flex-wrap justify-content-center gap-3">
