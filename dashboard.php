@@ -7,7 +7,7 @@ include_once "header.php";
         <div class="row justify-content-center g-4">
 
             <div class="col-4 col-md-2">
-                <a href="cardResidentes.php" class="text-decoration-none text-dark">
+                <a href="listResidentes.php" class="text-decoration-none text-dark">
                     <div class="circle-link mx-auto">
                         <img src="img/residentes-icon.png" alt="Ícone 1" class="circle-img">
                     </div>

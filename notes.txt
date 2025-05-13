@@ -1,10 +1,10 @@
 # Notas
 
 ## Tarefas
-- [ ]   backend e sql frmResidente
-- [ ]   reformular cardResidentes
-- [ ]   modal para cardResidentes
-- [ ]   
+- [ok]   backend e sql frmResidente
+- [ok]   reformular listResidentes
+- [ok]   modal para listResidentes
+- [ok]   delete residentes
 - [ ]
 - [ ]
 - [ ]
@@ -17,3 +17,5 @@
 
 ## Observações
 - 
+
+
