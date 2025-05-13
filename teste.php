@@ -1,5 +1,5 @@
 <?php include_once "header.php" ?>
-<?php include_once "dbConnection.php" ?>
+
 
 <main class="container">
     <!-- Botão que ativa o modal -->

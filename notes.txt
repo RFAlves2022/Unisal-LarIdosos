@@ -1,0 +1,19 @@
+# Notas
+
+## Tarefas
+- [ ]   backend e sql frmResidente
+- [ ]   reformular cardResidentes
+- [ ]   modal para cardResidentes
+- [ ]   
+- [ ]
+- [ ]
+- [ ]
+- [ ]
+## Ideias
+- 
+
+## Links Úteis
+- 
+
+## Observações
+- 
