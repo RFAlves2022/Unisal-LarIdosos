@@ -1,6 +1,9 @@
 .bgColor1 {
     background-color: #5D737E;
 }
+.color1{
+    color: #5D737E;
+}
 
 .bgColor2 {
     background-color: #64B6AC;
@@ -17,14 +20,16 @@
 .bgColor5 {
     background-color: #FCFFFD;
 }
-
+label {
+    color: #5D737E; 
+}
 body {
     background: linear-gradient(to bottom right, #d6f5f2, #eafff7, #ffffff);
     min-height: 100vh;
 }
 
 .table-rounded table {
-    border-radius: 12px;
+    border-radius: 15px;
     overflow: hidden;
 }
 
@@ -77,4 +82,12 @@ body {
 #btn-pesquisar:hover {
     background-color: #4a5d66;
     border-color: #4a5d66;
+}
+
+.formulario-molde {
+            border: 1px solid #ccc;
+            padding: 20px;
+            border-radius: 10px; /* Cantos arredondados */
+            margin-top: 50px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
