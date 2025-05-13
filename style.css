@@ -20,9 +20,7 @@
 .bgColor5 {
     background-color: #FCFFFD;
 }
-label {
-    color: #5D737E; 
-}
+
 body {
     background: linear-gradient(to bottom right, #d6f5f2, #eafff7, #ffffff);
     min-height: 100vh;

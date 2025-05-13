@@ -16,7 +16,7 @@ include_once "header.php"
             </div>
         </div>
 
-        <div class="row d-flex flex-wrap justify-content-center gap-3">
+        <div class="row d-flex flex-wrap justify-content-center gap-3 pt-3">
             <!-- Card 1 -->
             <div class="card text-left rounded-4" style="
               width: 250px;
@@ -241,18 +241,6 @@ include_once "header.php"
                     <h5 class="card-title text-center">Sérgio Brito</h5>
                     <label><strong>Idade:</strong> 58 anos</label><br>
                     <label><strong>Email:</strong> sergio.brito@email.com</label>
-                </div>
-            </div>
-
-            <!-- Card 18 -->
-            <div class="card text-left rounded-4"
-                style="width: 250px; height: 300px; margin-right: 20px; margin-bottom: 10px;">
-                <img src="img/avatar-generic.png" class="rounded-circle mx-auto d-block mt-3" alt="Foto do usuário"
-                    width="100" height="100">
-                <div class="card-body">
-                    <h5 class="card-title text-center">Camila Borges</h5>
-                    <label><strong>
-
                 </div>
             </div>
 </main>
