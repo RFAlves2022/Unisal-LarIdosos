@@ -9,7 +9,7 @@
 - [X]    cadastro de consultas
 - [ok]    listas dashboard dia(dashboard)
 - [ok]   todas as tbs do banco criadas
-- [ ]
+- [ ]    ESTRUTURA MVC
 - [ ]
 - [ ]
 - [ ]
