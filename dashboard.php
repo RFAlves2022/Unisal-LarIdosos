@@ -26,7 +26,7 @@ include_once "dashboardSql.php";
             </div>
 
             <div class="col-4 col-md-2">
-                <a href="rotinaRemedio.php" class="text-decoration-none text-dark">
+                <a href="listMedicamentos.php" class="text-decoration-none text-dark">
                     <div class="circle-link mx-auto" style="border: 2px solid #5D737E; border-radius: 50%; padding: 10px; background-color: #f8f9fa; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); transition: transform 0.3s, box-shadow 0.3s;">
                         <img src="img/medicacao-icon.png" alt="Ícone 3" class="circle-img">
                     </div>
