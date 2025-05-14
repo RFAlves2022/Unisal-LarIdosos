@@ -36,7 +36,7 @@ function calcularIdade($data_nasc) {
   <!-- Link "Cadastrar Novo" alinhado com a lista -->
   <div class="d-flex justify-content-between align-items-center" style="max-width: 700px; margin: 0 auto;">
       <p class="text-center mb-0">Total de Residentes: <?= count($residentes) ?></p>
-      <a href="frmResidente.php" class="btn btn-success" style="background-color: #5D737E;">Cadastrar Novo</a>
+      <a href="frmResidente.php" class="color1">Cadastrar Novo</a>
   </div>
 
   <?php if (count($residentes) > 0): ?>

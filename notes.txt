@@ -5,6 +5,14 @@
 - [ok]   reformular listResidentes
 - [ok]   modal para listResidentes
 - [ok]   delete residentes
+- [ ]    calendario de consultas
+- [ ]    cadastro de consultas
+- [ ]    lista consulta dia(dashboard)
+- [ ]
+- [ ]
+- [ ]
+- [ ]
+- [ ]
 - [ ]
 - [ ]
 - [ ]
