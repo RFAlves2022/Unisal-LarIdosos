@@ -6,80 +6,90 @@ $search = $_GET['search'] ?? '';
 
 // Consulta ao banco de dados com filtro de pesquisa
 if (!empty($search)) {
-    $sql = $pdo->prepare("SELECT * FROM tb_residentes WHERE nome LIKE :search ORDER BY nome ASC");
-    $sql->bindValue(':search', '%' . $search . '%');
-    $sql->execute();
+  $sql = $pdo->prepare("SELECT * FROM tb_residentes WHERE nome LIKE :search ORDER BY nome ASC");
+  $sql->bindValue(':search', '%' . $search . '%');
+  $sql->execute();
 } else {
-    $sql = $pdo->query("SELECT * FROM tb_residentes ORDER BY nome ASC"); // Seleciona todos os campos
+  $sql = $pdo->query("SELECT * FROM tb_residentes ORDER BY nome ASC"); // Seleciona todos os campos
 }
 
 $residentes = $sql->fetchAll(PDO::FETCH_ASSOC);
 
 // Função para calcular a idade
-function calcularIdade($data_nasc) {
-    $nasc = new DateTime($data_nasc);
-    $hoje = new DateTime();
-    return $nasc->diff($hoje)->y; // diferença em anos
+function calcularIdade($data_nasc)
+{
+  $nasc = new DateTime($data_nasc);
+  $hoje = new DateTime();
+  return $nasc->diff($hoje)->y; // diferença em anos
 }
 ?>
 
-<main class="container mt-3">
-  <h2 class="text-center mb-5 color1">Lista de Residentes</h2>
-  <!-- Barra de busca -->
-  <form method="GET" class="mb-3">
-      <div class="input-group mx-auto " style="max-width: 700px;">
+<main class="container mt-4">
+  <div class="card bg-light shadow-sm rounded-lg">
+    <div class="card-header">
+      <div class="d-flex justify-content-between align-items-center">
+        <a href="dashboard.php" class="btn text-white" style="background-color: #5D737E;">Voltar</a>
+        <h2 class="mb-0 text-center flex-grow-1 color1">Lista de Residentes</h2>
+      </div>
+    </div>
+    <div class="card-body">
+      <!-- Barra de busca -->
+      <form method="GET" class="mb-4">
+        <div class="input-group mx-auto" style="max-width: 400px;">
           <input type="text" name="search" class="form-control" placeholder="Pesquisar por nome..." value="<?= htmlspecialchars($search) ?>">
           <button class="btn btn-primary" type="submit" style="background-color: #5D737E;">Buscar</button>
+        </div>
+      </form>
+
+      <!-- Link "Cadastrar Novo" alinhado com a lista -->
+      <div class="d-flex justify-content-between align-items-center mb-3" style="max-width: 700px; margin: 0 auto;">
+        <p class="mb-0 text-muted">Total de Residentes: <strong><?= count($residentes) ?></strong></p>
+        <a href="frmCadResidente.php" class="color1">Cadastrar Novo</a>
       </div>
-  </form>
 
-  <!-- Link "Cadastrar Novo" alinhado com a lista -->
-  <div class="d-flex justify-content-between align-items-center" style="max-width: 700px; margin: 0 auto;">
-      <p class="text-center mb-0">Total de Residentes: <?= count($residentes) ?></p>
-      <a href="frmResidente.php" class="color1">Cadastrar Novo</a>
-  </div>
-
-  <?php if (count($residentes) > 0): ?>
-      <div class="list-group mx-auto" style="max-width: 700px;"> <!-- Diminuindo a largura -->
+      <?php if (count($residentes) > 0): ?>
+        <div class="list-group mx-auto" style="max-width: 700px;"> <!-- Diminuindo a largura -->
           <?php foreach ($residentes as $res): ?>
-              <div class="list-group-item list-group-item-action d-flex justify-content-between align-items-center p-3 shadow-sm rounded" 
-                   data-bs-toggle="modal" data-bs-target="#residenteModal" 
-                   data-nome="<?= htmlspecialchars($res['nome']) ?>"
-                   data-data_nasc="<?= htmlspecialchars((new DateTime($res['data_nasc']))->format('d/m/Y')) ?>"
-                   data-cpf="<?= htmlspecialchars($res['cpf']) ?>"
-                   data-rg="<?= htmlspecialchars($res['rg']) ?>"
-                   data-telefone="<?= htmlspecialchars($res['telefone']) ?>"
-                   data-endereco="<?= htmlspecialchars($res['endereco']) ?>"
-                   data-email="<?= htmlspecialchars($res['email']) ?>"
-                   data-quarto="<?= htmlspecialchars($res['quarto']) ?>"
-                   data-medicamentos="<?= htmlspecialchars($res['medicamentos']) ?>"
-                   data-alergias="<?= htmlspecialchars($res['alergias']) ?>"
-                   data-restricoes_alimentares="<?= htmlspecialchars($res['restricoes_alimentares']) ?>"
-                   data-responsavel_nome="<?= htmlspecialchars($res['responsavel_nome']) ?>"
-                   data-responsavel_telefone="<?= htmlspecialchars($res['responsavel_telefone']) ?>"
-                   data-responsavel_email="<?= htmlspecialchars($res['responsavel_email']) ?>"
-                   data-parente_grau="<?= htmlspecialchars($res['parente_grau']) ?>">
-                  <div class="d-flex align-items-center">
-                      <i class="bi bi-person-circle fs-3 text-primary me-3"></i> <!-- Ícone menor -->
-                      <div>
-                          <h6 class="mb-0"><?= htmlspecialchars($res['nome']) ?></h6>
-                          <small class="text-muted">Idade: <?= calcularIdade($res['data_nasc']) ?> anos</small>
-                      </div>
-                  </div>
-                  <small class="text-muted">Quarto: <?= htmlspecialchars($res['quarto']) ?></small>
+            <div class="list-group-item list-group-item-action d-flex justify-content-between align-items-center p-3 shadow-sm rounded"
+              data-bs-toggle="modal" data-bs-target="#residenteModal"
+              data-nome="<?= htmlspecialchars($res['nome']) ?>"
+              data-data_nasc="<?= htmlspecialchars((new DateTime($res['data_nasc']))->format('d/m/Y')) ?>"
+              data-cpf="<?= htmlspecialchars($res['cpf']) ?>"
+              data-rg="<?= htmlspecialchars($res['rg']) ?>"
+              data-telefone="<?= htmlspecialchars($res['telefone']) ?>"
+              data-endereco="<?= htmlspecialchars($res['endereco']) ?>"
+              data-email="<?= htmlspecialchars($res['email']) ?>"
+              data-quarto="<?= htmlspecialchars($res['quarto']) ?>"
+              data-medicamentos="<?= htmlspecialchars($res['medicamentos']) ?>"
+              data-alergias="<?= htmlspecialchars($res['alergias']) ?>"
+              data-restricoes_alimentares="<?= htmlspecialchars($res['restricoes_alimentares']) ?>"
+              data-responsavel_nome="<?= htmlspecialchars($res['responsavel_nome']) ?>"
+              data-responsavel_telefone="<?= htmlspecialchars($res['responsavel_telefone']) ?>"
+              data-responsavel_email="<?= htmlspecialchars($res['responsavel_email']) ?>"
+              data-parente_grau="<?= htmlspecialchars($res['parente_grau']) ?>">
+              <div class="d-flex align-items-center">
+                <i class="bi bi-person-circle fs-3 text-primary me-3"></i> <!-- Ícone menor -->
+                <div>
+                  <h6 class="mb-0"><?= htmlspecialchars($res['nome']) ?></h6>
+                  <small class="text-muted">Idade: <?= calcularIdade($res['data_nasc']) ?> anos</small>
+                </div>
               </div>
+              <small class="text-muted">Quarto: <?= htmlspecialchars($res['quarto']) ?></small>
+            </div>
           <?php endforeach; ?>
-      </div>
-  <?php else: ?>
-      <div class="alert alert-warning text-center">Nenhum residente encontrado.</div>
-  <?php endif; ?>
+        </div>
+      <?php else: ?>
+        <div class="alert alert-warning text-center">Nenhum residente encontrado.</div>
+      <?php endif; ?>
+    </div>
+  </div>
 </main>
 
 <!-- Modal -->
 <div class="modal fade" id="residenteModal" tabindex="-1" aria-labelledby="residenteModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
-      <div class="modal-header">
+      <div class="modal-header bg-primary text-white">
         <h5 class="modal-title" id="residenteModalLabel">Detalhes do Residente</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
@@ -114,7 +124,7 @@ function calcularIdade($data_nasc) {
 <script>
   // Preenche o modal com os dados do residente
   const residenteModal = document.getElementById('residenteModal');
-  residenteModal.addEventListener('show.bs.modal', function (event) {
+  residenteModal.addEventListener('show.bs.modal', function(event) {
     const button = event.relatedTarget; // Botão que acionou o modal
     const modal = residenteModal.querySelector('.modal-body');
 
