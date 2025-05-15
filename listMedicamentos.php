@@ -9,7 +9,7 @@ require "medQuerys.php";
         <div class="card-header">
             <div class="d-flex justify-content-between align-items-center">
                 <a href="dashboard.php" class="btn text-white" style="background-color: #5D737E;">Voltar</a>
-                <h2 class="mb-0 text-center flex-grow-1 color1">Lista de Medicamentos</h2>
+                <h2 class="mb-0 text-center flex-grow-1 color1">Controle de Medicamentos</h2>
             </div>
         </div>
         <div class="card-body d-flex flex-column">

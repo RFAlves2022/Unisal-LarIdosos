@@ -29,7 +29,7 @@ function calcularIdade($data_nasc)
     <div class="card-header">
       <div class="d-flex justify-content-between align-items-center">
         <a href="dashboard.php" class="btn text-white" style="background-color: #5D737E;">Voltar</a>
-        <h2 class="mb-0 text-center flex-grow-1 color1">Lista de Residentes</h2>
+        <h2 class="mb-0 text-center flex-grow-1 color1">Residentes</h2>
       </div>
     </div>
     <div class="card-body">
@@ -89,8 +89,8 @@ function calcularIdade($data_nasc)
 <div class="modal fade" id="residenteModal" tabindex="-1" aria-labelledby="residenteModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
-      <div class="modal-header bg-primary text-white">
-        <h5 class="modal-title" id="residenteModalLabel">Detalhes do Residente</h5>
+      <div class="modal-header">
+        <h5 class="modal-title " id="residenteModalLabel">Detalhes do Residente</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
@@ -115,7 +115,7 @@ function calcularIdade($data_nasc)
           <input type="hidden" name="cpf" id="modal-cpf-hidden">
           <button type="submit" class="btn btn-danger">Deletar</button>
         </form>
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" style="background-color: #5D737E;">Fechar</button>
       </div>
     </div>
   </div>

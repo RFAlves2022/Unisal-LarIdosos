@@ -1,8 +1,7 @@
 <?php
 include_once "dbConnection.php"; // Conexão com o banco de dados
-include_once "authCheck.php"; // Verifica se o usuário está logado 
- ?>
-
+include_once "authCheck.php"; // Verifica se o usuário está logado
+?>
 <!DOCTYPE html>
 <html lang="PT-BR">
 
@@ -47,3 +46,6 @@ include_once "authCheck.php"; // Verifica se o usuário está logado
             </div>
         </nav>
     </header>
+</body>
+
+</html></html>

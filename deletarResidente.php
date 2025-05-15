@@ -9,14 +9,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $sql->bindValue(':cpf', $cpf);
 
         if ($sql->execute()) {
-            header("Location: teste.php?success=Residente deletado com sucesso!");
+            header("Location: listResidentes.php?success=Residente deletado com sucesso!");
             exit;
         } else {
-            header("Location: teste.php?error=Erro ao deletar o residente.");
+            header("Location: listResidentes.php?error=Erro ao deletar o residente.");
             exit;
         }
     } else {
-        header("Location: teste.php?error=CPF inválido.");
+        header("Location: listResidentes.php?error=CPF inválido.");
         exit;
     }
 }

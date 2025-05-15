@@ -1,5 +1,4 @@
 <?php
-
 include_once "dbConnection.php"; // Conexão com o banco de dados
 
 try {

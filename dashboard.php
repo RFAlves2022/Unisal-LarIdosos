@@ -40,10 +40,10 @@ include_once "dashboardSql.php";
     <div class="row">
         <!-- Tabela de Consultas -->
         <div class="col-md-6 mb-4">
-            <?php if (count($consultasHoje) > 0): ?>
-                <div class="card bg-white shadow-sm rounded-lg h-100">
-                    <div class="card-body">
-                        <h4 class="mb-4 text-center color1">Consultas de <?= date('d/m/Y') ?></h4>
+            <div class="card bg-white shadow-sm rounded-lg h-100">
+                <div class="card-body">
+                    <h4 class="mb-4 text-center color1">Consultas agendadas <?= date('d/m/Y') ?></h4>
+                    <?php if (count($consultasHoje) > 0): ?>
                         <div class="table-responsive table-rounded" style="max-height: 400px; overflow-y: auto;">
                             <table class="table table-bordered table-striped mb-0 text-center">
                                 <thead class="table-light">
@@ -66,20 +66,18 @@ include_once "dashboardSql.php";
                                 </tbody>
                             </table>
                         </div>
-                    </div>
+                    <?php else: ?>
+                        <p class="text-center text-muted mt-3">Nenhuma consulta agendada para hoje.</p>
+                    <?php endif; ?>
                 </div>
-            <?php else: ?>
-                <div class="alert alert-warning text-center">
-                    Nenhuma consulta agendada para hoje.
-                </div>
-            <?php endif; ?>
+            </div>
         </div>
 
         <!-- Tabela de Medicamentos -->
         <div class="col-md-6 mb-4">
             <div class="card bg-white shadow-sm rounded-lg h-100">
                 <div class="card-body">
-                    <h4 class="mb-4 text-center color1">Medicamentos do dia</h4>
+                    <h4 class="mb-4 text-center color1">Medicação diária</h4>
                     <div class="table-responsive table-rounded" style="max-height: 400px; overflow-y: auto;">
                         <table class="table table-bordered table-striped mb-0 text-center">
                             <thead class="table-light">
