@@ -1,13 +1,17 @@
 <?php
+require_once "dbConnection.php";
+/*
 session_start();
-require_once "dbConnection.php"; // Conexão com o banco
+ // Conexão com o banco
 
 // Verifica se o usuário está logado e se é o admin
 if (!isset($_SESSION['username']) || $_SESSION['username'] !== 'admin') {
     header("Location: frmlogin.php"); // Redireciona para a página de login
     exit();
 }
-
+*
+ * 
+ */
 $mensagem = '';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -72,7 +76,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             </form>
 
             <div class="mt-3 text-center">
-                <a href="frmlogin.php" class="text-decoration-none">Ir para o login</a>
+                <a href="login.php" class="text-decoration-none">Ir para o login</a>
             </div>
         </div>
     </div>

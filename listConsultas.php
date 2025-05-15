@@ -100,11 +100,21 @@ include_once "consultasQuerys.php"; // Inclui o backend de consultas
                             <select class="form-select" id="resident_id" name="resident_id" required>
                                 <?php
                                 $residentes = $pdo->query("SELECT id, nome FROM tb_residentes ORDER BY nome ASC")->fetchAll(PDO::FETCH_ASSOC);
-                                foreach ($residentes as $residente) {
-                                    echo "<option value='{$residente['id']}'>{$residente['nome']}</option>";
-                                }
+                                if (count($residentes) > 0):
+                                    echo "<option value='' disabled selected>Selecione um residente</option>";
+                                    foreach ($residentes as $residente) {
+                                        echo "<option value='{$residente['id']}'>{$residente['nome']}</option>";
+                                    }
+                                else:
+                                    echo "<option value='' disabled selected>Nenhum residente disponível</option>";
+                                endif;
                                 ?>
                             </select>
+                            <?php if (count($residentes) === 0): ?>
+                                <div class="mt-2">
+                                    <a href="cadastrarResidente.php" class="btn btn-sm btn-primary">Cadastrar Residente</a>
+                                </div>
+                            <?php endif; ?>
                         </div>
                         <div class="col-md-4">
                             <label for="data_consulta" class="form-label">Data da Consulta</label>

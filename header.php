@@ -34,8 +34,10 @@ include_once "authCheck.php"; // Verifica se o usuário está logado
                                 height="35" width="35">
                         </a>
                         <ul class="dropdown-menu dropdown-menu-end shadow" aria-labelledby="userDropdown">
-                            <li><a class="dropdown-item" href="#">👤 Meu Perfil</a></li>
-                            <li><a class="dropdown-item" href="#">⚙️ Configurações</a></li>
+                            <li><a class="dropdown-item" href="profile.php">👤 Meu Perfil</a></li>
+                            <?php if (isset($_SESSION['username']) && $_SESSION['username'] === 'admin'): ?>
+                                <li><a class="dropdown-item" href="adminConfig.php">⚙️ Configurações</a></li>
+                            <?php endif; ?>
                             <li>
                                 <hr class="dropdown-divider">
                             </li>
@@ -47,5 +49,3 @@ include_once "authCheck.php"; // Verifica se o usuário está logado
         </nav>
     </header>
 </body>
-
-</html></html>

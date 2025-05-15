@@ -1,6 +1,6 @@
 <?php
 include_once "header.php";
-include_once "dashboardSql.php";
+include_once "dashboardQuerys.php";
 ?>
 
 <main>

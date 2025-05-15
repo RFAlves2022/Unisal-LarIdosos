@@ -43,27 +43,39 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         try {
             if ($action === 'create') {
-                // Cadastro de novo medicamento
-                $resident_id = $_POST['resident_id'];
-                $nome_medicamento = $_POST['nome_medicamento'];
-                $horario = $_POST['horario'];
-                $dosagem = $_POST['dosagem'];
-                $via_adm = $_POST['via_adm'];
-                $observacoes = $_POST['observacoes'];
+                try {
+                    // Validação dos campos obrigatórios
+                    if (empty($_POST['resident_id']) || empty($_POST['data_consulta']) || empty($_POST['medico'])) {
+                        throw new Exception('Campos obrigatórios não preenchidos.');
+                    }
 
-                $stmt = $pdo->prepare("
-                    INSERT INTO tb_medicamentos (resident_id, nome_medicamento, horario, dosagem, via_adm, observacoes)
-                    VALUES (:resident_id, :nome_medicamento, :horario, :dosagem, :via_adm, :observacoes)
-                ");
-                $stmt->execute([
-                    ':resident_id' => $resident_id,
-                    ':nome_medicamento' => $nome_medicamento,
-                    ':horario' => $horario,
-                    ':dosagem' => $dosagem,
-                    ':via_adm' => $via_adm,
-                    ':observacoes' => $observacoes,
-                ]);
-                $_SESSION['message'] = 'Medicamento cadastrado com sucesso!';
+                    $resident_id = $_POST['resident_id'];
+                    $data_consulta = $_POST['data_consulta'];
+                    $horario = $_POST['horario'] ?? null;
+                    $medico = $_POST['medico'];
+                    $especialidade = $_POST['especialidade'] ?? null;
+                    $observacoes = $_POST['observacoes'] ?? null;
+                    $prescricao = $_POST['prescricao'] ?? null;
+
+                    $stmt = $pdo->prepare("
+                        INSERT INTO tb_consultas (resident_id, data_consulta, horario, medico, especialidade, observacoes, prescricao)
+                        VALUES (:resident_id, :data_consulta, :horario, :medico, :especialidade, :observacoes, :prescricao)
+                    ");
+                    $stmt->execute([
+                        ':resident_id' => $resident_id,
+                        ':data_consulta' => $data_consulta,
+                        ':horario' => $horario,
+                        ':medico' => $medico,
+                        ':especialidade' => $especialidade,
+                        ':observacoes' => $observacoes,
+                        ':prescricao' => $prescricao,
+                    ]);
+
+                    $_SESSION['message'] = 'Consulta cadastrada com sucesso!';
+                } catch (Exception $e) {
+                    $_SESSION['error'] = 'Erro ao cadastrar consulta: ' . $e->getMessage();
+                    error_log($e->getMessage());
+                }
             } elseif ($action === 'update') {
                 // Atualização de medicamento
                 $id = $_POST['id'];
@@ -100,6 +112,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             }
         } catch (Exception $e) {
             $_SESSION['error'] = 'Ocorreu um erro: ' . $e->getMessage();
+            error_log($e->getMessage()); // Adiciona o erro ao log do servidor
         }
 
         // Redireciona para evitar reenvio do formulário
