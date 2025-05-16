@@ -9,17 +9,21 @@ include_once "header.php";
                 <div class="col-xl-9 col-lg-10">
                     <div class="card shadow-lg border-0 rounded-4">
                         <div class="card-header bg-gradient" style="background: linear-gradient(90deg, #5D737E 60%, #64B6AC 100%);">
-                            <h2 class="mb-0 text-white text-center py-3 d-flex justify-content-center align-items-center gap-3">
-                                <i class="bi bi-calendar2-week"></i> Rotina Diária do Residente
-                                <!-- Ícone de Alertas -->
-                                <button type="button" class="btn btn-link p-0 ms-3 align-middle" data-bs-toggle="modal" data-bs-target="#alertasModal" title="Ver Alertas">
-                                    <i class="bi bi-bell-fill fs-3 text-warning"></i>
-                                </button>
-                                <!-- Ícone para ir para rotinaCadastro.php -->
-                                <a href="rotinaCadastro.php" class="btn btn-link p-0 ms-2 align-middle" title="Cadastrar/Editar Rotina">
-                                    <i class="bi bi-pencil-square fs-3 text-info"></i>
-                                </a>
-                            </h2>
+                            <div class="position-relative">
+                                <h2 class="mb-0 text-center py-3 d-flex justify-content-center align-items-center gap-3" style="width: 100%;">
+                                    <i class="bi bi-calendar2-week"></i> Rotina Diária do Residente
+                                </h2>
+                                <div class="position-absolute top-50 end-0 translate-middle-y d-flex align-items-center gap-2 me-3">
+                                    <!-- Ícone de Alertas -->
+                                    <button type="button" class="btn btn-link p-0 align-middle" data-bs-toggle="modal" data-bs-target="#alertasModal" title="Ver Alertas">
+                                        <i class="bi bi-bell-fill fs-3 text-warning"></i>
+                                    </button>
+                                    <!-- Ícone para ir para rotinaCadastro.php -->
+                                    <a href="rotinaCadastro.php" class="btn btn-link p-0 align-middle" title="Cadastrar/Editar Rotina">
+                                        <i class="bi bi-pencil-square fs-3 text-info"></i>
+                                    </a>
+                                </div>
+                            </div>
                         </div>
                         <div class="card-body p-5">
                             <div class="row g-4">
@@ -130,21 +134,15 @@ include_once "header.php";
                                     </div>
                                 </div>
                                 <!-- Observações do Dia -->
-                                <div class="col-md-6">
+                                <div class="col-12">
                                     <div class="card border-0 shadow-sm h-100">
                                         <div class="card-body">
                                             <i class="bi bi-journal-text fs-1 text-secondary d-block text-center"></i>
                                             <h5 class="mt-3 mb-3 text-secondary text-center">Observações do Dia</h5>
-                                            <ul class="list-group list-group-flush">
-                                                <li class="list-group-item">
-                                                    Dormiu bem durante a noite.
-                                                </li>
-                                                <li class="list-group-item">
-                                                    Participou de todas as atividades.
-                                                </li>
-                                                <li class="list-group-item">
-                                                    Apresentou leve cansaço após a caminhada.
-                                                </li>
+                                            <ul class="list-group list-group-flush d-flex flex-wrap justify-content-center" style="column-count: 2;">
+                                                <li class="list-group-item w-100" style="break-inside: avoid;">Dormiu bem durante a noite.</li>
+                                                <li class="list-group-item w-100" style="break-inside: avoid;">Participou de todas as atividades.</li>
+                                                <li class="list-group-item w-100" style="break-inside: avoid;">Apresentou leve cansaço após a caminhada.</li>
                                             </ul>
                                         </div>
                                     </div>

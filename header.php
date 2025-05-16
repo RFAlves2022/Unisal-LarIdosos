@@ -1,6 +1,6 @@
 <?php
-include_once "dbConnection.php"; // Conexão com o banco de dados
-include_once "authCheck.php"; // Verifica se o usuário está logado
+include_once "dbConnection.php"; 
+include_once "authCheck.php"; 
 ?>
 <!DOCTYPE html>
 <html lang="PT-BR">
@@ -10,7 +10,7 @@ include_once "authCheck.php"; // Verifica se o usuário está logado
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="icon" href="img/abstract-icon.png" type="image/png">
+    <link rel="icon" href="img/logotipo-kairos.png" type="image/png">
     <title>Kairos - Page</title>
 </head>
 

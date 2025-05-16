@@ -7,7 +7,7 @@ include_once "dashboardQuerys.php";
     <div class="container-fluid">
         <div class="row">
             <!-- Sidebar Vertical -->
-            <nav class="col-md-2 d-none d-md-block bg-light sidebar py-4" style="min-height: 100vh; border-right: 1px solid #e0e0e0;">
+            <nav class="col-md-2 d-none d-md-block bg-light sidebar py-4" style="min-width: 120px; max-width: 140px; width: 13vw; min-height: 100vh; border-right: 1px solid #e0e0e0;">
                 <div class="position-sticky">
                     <ul class="nav flex-column align-items-center gap-4">
                         <li class="nav-item w-100">
@@ -64,7 +64,7 @@ include_once "dashboardQuerys.php";
                     </div>
                 </div>
                 <div class="container mt-1">
-                <div class="row">
+                <div class="row justify-content-center" style="margin-left: -120px;">
                     <!-- Tabela de Consultas -->
                     <div class="col-md-6 mb-4">
                         <div class="card bg-white shadow-sm rounded-lg h-100">
