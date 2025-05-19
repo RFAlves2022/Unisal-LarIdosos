@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 15/05/2025 às 22:23
+-- Tempo de geração: 19/05/2025 às 20:44
 -- Versão do servidor: 10.4.32-MariaDB
 -- Versão do PHP: 8.2.12
 
@@ -119,6 +119,41 @@ INSERT INTO `tb_medicamentos` (`id`, `resident_id`, `nome_medicamento`, `horario
 -- --------------------------------------------------------
 
 --
+-- Estrutura para tabela `tb_observacoes_dia`
+--
+
+CREATE TABLE `tb_observacoes_dia` (
+  `id` int(11) NOT NULL,
+  `resident_id` int(11) NOT NULL,
+  `observacao` text NOT NULL,
+  `data_hora` datetime NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Despejando dados para a tabela `tb_observacoes_dia`
+--
+
+INSERT INTO `tb_observacoes_dia` (`id`, `resident_id`, `observacao`, `data_hora`) VALUES
+(6, 101, 'Dormiu bem durante a noite.', '2025-05-18 07:30:00'),
+(7, 102, 'Apresentou leve confusão mental pela manhã.', '2025-05-18 08:00:00'),
+(8, 103, 'Se alimentou normalmente no café da manhã.', '2025-05-18 08:30:00'),
+(9, 104, 'Tomou os medicamentos sem resistência.', '2025-05-18 09:00:00'),
+(10, 105, 'Participou da atividade de pintura.', '2025-05-18 10:15:00'),
+(11, 106, 'Relatou dor nas costas.', '2025-05-18 11:00:00'),
+(12, 107, 'Almoçou bem, porém não quis sobremesa.', '2025-05-18 12:15:00'),
+(13, 108, 'Passou parte da tarde dormindo.', '2025-05-18 14:00:00'),
+(14, 109, 'Recebeu visita da neta.', '2025-05-18 15:30:00'),
+(15, 110, 'Apresentou sinais de ansiedade.', '2025-05-18 17:00:00'),
+(16, 111, 'Reclamou de frio no final da tarde.', '2025-05-18 18:00:00'),
+(17, 112, 'Tomou banho com auxílio.', '2025-05-18 18:30:00'),
+(18, 113, 'Assistiu televisão até as 20h.', '2025-05-18 20:00:00'),
+(19, 114, 'Foi dormir às 21h.', '2025-05-18 21:00:00'),
+(20, 115, 'Acordou durante a madrugada para ir ao banheiro.', '2025-05-19 02:00:00'),
+(21, 116, 'Sem alterações durante a noite.', '2025-05-19 06:00:00');
+
+-- --------------------------------------------------------
+
+--
 -- Estrutura para tabela `tb_residentes`
 --
 
@@ -175,6 +210,179 @@ INSERT INTO `tb_residentes` (`id`, `nome`, `data_nasc`, `cpf`, `rg`, `telefone`,
 -- --------------------------------------------------------
 
 --
+-- Estrutura para tabela `tb_rotina_atividade`
+--
+
+CREATE TABLE `tb_rotina_atividade` (
+  `id` int(11) NOT NULL,
+  `rotina_id` int(11) NOT NULL,
+  `hora` time NOT NULL,
+  `descricao` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Despejando dados para a tabela `tb_rotina_atividade`
+--
+
+INSERT INTO `tb_rotina_atividade` (`id`, `rotina_id`, `hora`, `descricao`) VALUES
+(1, 1, '08:30:00', 'Alongamento matinal'),
+(2, 1, '10:00:00', 'Atividade cognitiva: palavras cruzadas'),
+(3, 1, '15:00:00', 'Oficina de pintura'),
+(4, 1, '17:00:00', 'Caminhada leve'),
+(5, 2, '09:00:00', 'Ginástica leve'),
+(6, 2, '10:30:00', 'Leitura guiada em grupo'),
+(7, 2, '14:00:00', 'Sessão de música'),
+(8, 2, '16:30:00', 'Jogos de memória'),
+(9, 3, '08:15:00', 'Meditação guiada'),
+(10, 3, '11:00:00', 'Atividade com plantas (horta)'),
+(11, 3, '15:30:00', 'Cine-lar: filme antigo'),
+(12, 3, '18:00:00', 'Conversa em grupo'),
+(13, 4, '08:45:00', 'Caminhada assistida no jardim'),
+(14, 4, '09:45:00', 'Oficina de artesanato'),
+(15, 4, '14:30:00', 'Terapia ocupacional'),
+(16, 4, '17:15:00', 'Leitura individual'),
+(17, 5, '09:30:00', 'Atividade física supervisionada'),
+(18, 5, '10:15:00', 'Pintura com aquarela'),
+(19, 5, '15:00:00', 'Jogo de cartas'),
+(20, 5, '16:00:00', 'Roda de conversa'),
+(21, 6, '08:00:00', 'Alongamento matinal com música'),
+(22, 6, '11:00:00', 'Terapia com animais'),
+(23, 6, '14:00:00', 'Poesia em grupo'),
+(24, 6, '17:30:00', 'Jogo de damas'),
+(25, 7, '08:30:00', 'Leitura matinal de jornal'),
+(26, 7, '10:30:00', 'Artesanato com papel'),
+(27, 7, '15:30:00', 'Caminhada no pátio'),
+(28, 7, '16:45:00', 'Sessão de documentário'),
+(29, 8, '09:15:00', 'Terapia com música clássica'),
+(30, 8, '11:30:00', 'Conversa sobre memórias'),
+(31, 8, '14:30:00', 'Desenho livre'),
+(32, 8, '17:00:00', 'Roda de piadas leves'),
+(33, 9, '08:00:00', 'Exercício respiratório'),
+(34, 9, '10:00:00', 'Sessão de pintura com guache'),
+(35, 9, '14:00:00', 'Jogos de tabuleiro'),
+(36, 9, '18:00:00', 'Observação do pôr do sol'),
+(37, 10, '09:00:00', 'Revisão de fotos antigas'),
+(38, 10, '10:45:00', 'Trabalhos manuais com argila'),
+(39, 10, '15:15:00', 'Contação de histórias'),
+(40, 10, '16:30:00', 'Alongamento noturno'),
+(41, 11, '08:30:00', 'Leitura individual'),
+(42, 11, '10:30:00', 'Aula de canto'),
+(43, 11, '14:30:00', 'Oficina de desenho'),
+(44, 11, '17:00:00', 'Conversa sobre atualidades'),
+(45, 12, '09:00:00', 'Yoga para idosos'),
+(46, 12, '11:00:00', 'Jogos educativos'),
+(47, 12, '15:00:00', 'Cine debate'),
+(48, 12, '16:30:00', 'Criação de histórias'),
+(49, 13, '08:15:00', 'Caminhada assistida'),
+(50, 13, '09:45:00', 'Pintura coletiva'),
+(51, 13, '14:00:00', 'Sessão de música popular'),
+(52, 13, '17:00:00', 'Leitura bíblica'),
+(53, 14, '08:30:00', 'Meditação com som da natureza'),
+(54, 14, '10:30:00', 'Oficina de reciclagem'),
+(55, 14, '15:00:00', 'Roda de conversa temática'),
+(56, 14, '18:00:00', 'Atividade livre orientada'),
+(57, 15, '09:00:00', 'Estímulo cognitivo com jogos'),
+(58, 15, '10:45:00', 'Criação de cartões artesanais'),
+(59, 15, '14:30:00', 'Sessão de cantigas antigas'),
+(60, 15, '17:15:00', 'Exercícios com bola'),
+(61, 16, '08:00:00', 'Leitura de salmos'),
+(62, 16, '10:00:00', 'Colagem com revistas'),
+(63, 16, '14:30:00', 'Roda de perguntas e respostas'),
+(64, 16, '16:45:00', 'Alongamento relaxante'),
+(65, 17, '08:45:00', 'Jogo da memória'),
+(66, 17, '10:30:00', 'Atividades com música'),
+(67, 17, '15:00:00', 'Tarde de histórias pessoais'),
+(68, 17, '17:00:00', 'Exercícios de relaxamento'),
+(69, 18, '09:15:00', 'Café filosófico'),
+(70, 18, '11:00:00', 'Pintura em tela'),
+(71, 18, '14:30:00', 'Jogo do bingo'),
+(72, 18, '17:15:00', 'Contação de causos'),
+(73, 19, '08:30:00', 'Jardinagem leve'),
+(74, 19, '10:15:00', 'Sessão de filmes curtos'),
+(75, 19, '15:00:00', 'Roda de conversa musical'),
+(76, 19, '17:30:00', 'Leitura livre orientada'),
+(77, 20, '09:00:00', 'Terapia com aromas'),
+(78, 20, '11:00:00', 'Exercício com bastão'),
+(79, 20, '14:00:00', 'Jogos com palavras'),
+(80, 20, '16:30:00', 'Roda de cantigas'),
+(81, 21, '08:15:00', 'Caminhada e socialização'),
+(82, 21, '10:00:00', 'Aula de culinária leve'),
+(83, 21, '14:15:00', 'Sessão de filmes antigos'),
+(84, 21, '17:00:00', 'Roda de recordações'),
+(85, 22, '08:45:00', 'Roda de poesia'),
+(86, 22, '10:30:00', 'Criação de colagens'),
+(87, 22, '14:45:00', 'Aula de história do Brasil'),
+(88, 22, '16:45:00', 'Sessão de relaxamento guiado'),
+(89, 23, '09:00:00', 'Revisão de memórias fotográficas'),
+(90, 23, '11:00:00', 'Atividades com argila'),
+(91, 23, '14:30:00', 'Cine debate com pipoca'),
+(92, 23, '17:00:00', 'Círculo de histórias'),
+(93, 24, '08:30:00', 'Leitura em grupo'),
+(94, 24, '10:15:00', 'Atividades com dobraduras'),
+(95, 24, '15:00:00', 'Tarde musical'),
+(96, 24, '18:00:00', 'Sessão de relaxamento'),
+(97, 25, '09:00:00', 'Roda de conversa: infância'),
+(98, 25, '11:00:00', 'Pintura com lápis de cor'),
+(99, 25, '14:30:00', 'Jogos com bola'),
+(100, 25, '17:30:00', 'Audição de discos antigos');
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura para tabela `tb_rotina_residente`
+--
+
+CREATE TABLE `tb_rotina_residente` (
+  `id` int(11) NOT NULL,
+  `resident_id` int(11) NOT NULL,
+  `hora_acordar` time NOT NULL,
+  `hora_dormir` time NOT NULL,
+  `refeicao_cafe` time NOT NULL,
+  `refeicao_almoco` time NOT NULL,
+  `refeicao_lanche` time NOT NULL,
+  `refeicao_jantar` time NOT NULL,
+  `medicacao_manha` time NOT NULL,
+  `medicacao_tarde` time NOT NULL,
+  `medicacao_noite` time NOT NULL,
+  `cuidados_especiais` text DEFAULT NULL,
+  `criado_em` datetime DEFAULT current_timestamp(),
+  `atualizado_em` datetime DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Despejando dados para a tabela `tb_rotina_residente`
+--
+
+INSERT INTO `tb_rotina_residente` (`id`, `resident_id`, `hora_acordar`, `hora_dormir`, `refeicao_cafe`, `refeicao_almoco`, `refeicao_lanche`, `refeicao_jantar`, `medicacao_manha`, `medicacao_tarde`, `medicacao_noite`, `cuidados_especiais`, `criado_em`, `atualizado_em`) VALUES
+(1, 101, '06:30:00', '21:00:00', '07:00:00', '12:00:00', '15:30:00', '18:00:00', '07:30:00', '13:00:00', '20:30:00', 'Monitorar glicose diariamente', '2025-05-19 15:31:34', '2025-05-19 15:31:34'),
+(2, 102, '07:00:00', '20:30:00', '07:30:00', '12:00:00', '16:00:00', '18:30:00', '08:00:00', '13:00:00', '21:00:00', 'Evitar lactose', '2025-05-19 15:31:34', '2025-05-19 15:31:34'),
+(3, 103, '06:45:00', '21:15:00', '07:00:00', '12:30:00', '15:30:00', '18:00:00', '07:00:00', '13:30:00', '20:30:00', NULL, '2025-05-19 15:31:34', '2025-05-19 15:31:34'),
+(4, 104, '06:00:00', '20:45:00', '06:30:00', '11:45:00', '15:00:00', '17:45:00', '06:45:00', '13:15:00', '20:15:00', 'Sem glúten na alimentação', '2025-05-19 15:31:34', '2025-05-19 15:31:34'),
+(5, 105, '07:15:00', '21:00:00', '07:45:00', '12:15:00', '16:00:00', '18:45:00', '08:00:00', '13:30:00', '21:15:00', NULL, '2025-05-19 15:31:34', '2025-05-19 15:31:34'),
+(6, 106, '06:30:00', '20:30:00', '07:00:00', '12:00:00', '15:00:00', '18:00:00', '07:15:00', '13:00:00', '20:00:00', 'Evitar produtos com iodo', '2025-05-19 15:31:34', '2025-05-19 15:31:34'),
+(7, 107, '06:45:00', '21:00:00', '07:15:00', '12:00:00', '15:30:00', '18:15:00', '07:30:00', '13:15:00', '20:30:00', NULL, '2025-05-19 15:31:34', '2025-05-19 15:31:34'),
+(8, 108, '06:15:00', '20:15:00', '06:45:00', '11:45:00', '15:00:00', '17:30:00', '07:00:00', '12:45:00', '20:00:00', 'Evitar contato com amendoim', '2025-05-19 15:31:34', '2025-05-19 15:31:34'),
+(9, 109, '07:00:00', '21:30:00', '07:30:00', '12:30:00', '16:00:00', '19:00:00', '08:00:00', '14:00:00', '21:30:00', NULL, '2025-05-19 15:31:34', '2025-05-19 15:31:34'),
+(10, 110, '06:00:00', '20:30:00', '06:30:00', '11:30:00', '15:00:00', '17:45:00', '06:45:00', '12:30:00', '20:15:00', NULL, '2025-05-19 15:31:34', '2025-05-19 15:31:34'),
+(11, 111, '06:30:00', '21:00:00', '07:00:00', '12:00:00', '15:00:00', '18:00:00', '07:15:00', '13:00:00', '20:30:00', NULL, '2025-05-19 15:31:34', '2025-05-19 15:31:34'),
+(12, 112, '07:15:00', '21:00:00', '07:45:00', '12:30:00', '16:15:00', '19:00:00', '08:00:00', '13:30:00', '21:15:00', 'Evitar frutos do mar', '2025-05-19 15:31:34', '2025-05-19 15:31:34'),
+(13, 113, '06:45:00', '20:30:00', '07:00:00', '12:00:00', '15:00:00', '18:00:00', '07:30:00', '13:00:00', '20:30:00', 'Controle de pressão arterial', '2025-05-19 15:31:34', '2025-05-19 15:31:34'),
+(14, 114, '06:00:00', '20:00:00', '06:30:00', '11:30:00', '15:00:00', '17:30:00', '06:45:00', '12:30:00', '20:00:00', 'Sem glúten', '2025-05-19 15:31:34', '2025-05-19 15:31:34'),
+(15, 115, '06:30:00', '20:30:00', '07:00:00', '12:00:00', '15:30:00', '18:30:00', '07:15:00', '13:00:00', '20:30:00', 'Controle de glicemia', '2025-05-19 15:31:34', '2025-05-19 15:31:34'),
+(16, 116, '07:00:00', '21:00:00', '07:30:00', '12:30:00', '16:00:00', '18:45:00', '08:00:00', '13:30:00', '21:15:00', 'Evitar lactose', '2025-05-19 15:31:34', '2025-05-19 15:31:34'),
+(17, 117, '06:30:00', '20:30:00', '07:00:00', '12:00:00', '15:00:00', '18:00:00', '07:30:00', '13:00:00', '20:30:00', NULL, '2025-05-19 15:31:34', '2025-05-19 15:31:34'),
+(18, 118, '06:00:00', '20:00:00', '06:30:00', '11:30:00', '15:00:00', '17:30:00', '06:45:00', '12:30:00', '20:00:00', 'Evitar penicilina', '2025-05-19 15:31:34', '2025-05-19 15:31:34'),
+(19, 119, '07:15:00', '21:15:00', '07:45:00', '12:30:00', '16:00:00', '19:00:00', '08:00:00', '13:30:00', '21:15:00', NULL, '2025-05-19 15:31:34', '2025-05-19 15:31:34'),
+(20, 120, '06:45:00', '20:45:00', '07:15:00', '12:15:00', '15:30:00', '18:30:00', '07:30:00', '13:15:00', '20:45:00', NULL, '2025-05-19 15:31:34', '2025-05-19 15:31:34'),
+(21, 121, '06:30:00', '21:00:00', '07:00:00', '12:00:00', '15:00:00', '18:00:00', '07:15:00', '13:00:00', '20:30:00', NULL, '2025-05-19 15:31:34', '2025-05-19 15:31:34'),
+(22, 122, '06:00:00', '20:30:00', '06:30:00', '11:30:00', '15:00:00', '17:30:00', '06:45:00', '12:30:00', '20:00:00', 'Evitar aspirina', '2025-05-19 15:31:34', '2025-05-19 15:31:34'),
+(23, 123, '06:30:00', '21:00:00', '07:00:00', '12:00:00', '15:30:00', '18:30:00', '07:30:00', '13:00:00', '20:30:00', NULL, '2025-05-19 15:31:34', '2025-05-19 15:31:34'),
+(24, 124, '06:15:00', '20:45:00', '06:45:00', '12:00:00', '15:00:00', '18:00:00', '07:00:00', '13:00:00', '20:15:00', 'Controle glicêmico', '2025-05-19 15:31:34', '2025-05-19 15:31:34'),
+(25, 125, '06:45:00', '21:15:00', '07:15:00', '12:15:00', '15:30:00', '18:45:00', '07:30:00', '13:15:00', '20:45:00', NULL, '2025-05-19 15:31:34', '2025-05-19 15:31:34');
+
+-- --------------------------------------------------------
+
+--
 -- Estrutura para tabela `tb_users`
 --
 
@@ -221,12 +429,33 @@ ALTER TABLE `tb_medicamentos`
   ADD KEY `resident_id` (`resident_id`);
 
 --
+-- Índices de tabela `tb_observacoes_dia`
+--
+ALTER TABLE `tb_observacoes_dia`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `resident_id` (`resident_id`);
+
+--
 -- Índices de tabela `tb_residentes`
 --
 ALTER TABLE `tb_residentes`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `cpf` (`cpf`),
   ADD UNIQUE KEY `rg` (`rg`);
+
+--
+-- Índices de tabela `tb_rotina_atividade`
+--
+ALTER TABLE `tb_rotina_atividade`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `rotina_id` (`rotina_id`);
+
+--
+-- Índices de tabela `tb_rotina_residente`
+--
+ALTER TABLE `tb_rotina_residente`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `resident_id` (`resident_id`);
 
 --
 -- Índices de tabela `tb_users`
@@ -252,10 +481,28 @@ ALTER TABLE `tb_medicamentos`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
+-- AUTO_INCREMENT de tabela `tb_observacoes_dia`
+--
+ALTER TABLE `tb_observacoes_dia`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+
+--
 -- AUTO_INCREMENT de tabela `tb_residentes`
 --
 ALTER TABLE `tb_residentes`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=126;
+
+--
+-- AUTO_INCREMENT de tabela `tb_rotina_atividade`
+--
+ALTER TABLE `tb_rotina_atividade`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=101;
+
+--
+-- AUTO_INCREMENT de tabela `tb_rotina_residente`
+--
+ALTER TABLE `tb_rotina_residente`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- AUTO_INCREMENT de tabela `tb_users`
@@ -278,6 +525,24 @@ ALTER TABLE `tb_consultas`
 --
 ALTER TABLE `tb_medicamentos`
   ADD CONSTRAINT `tb_medicamentos_ibfk_1` FOREIGN KEY (`resident_id`) REFERENCES `tb_residentes` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Restrições para tabelas `tb_observacoes_dia`
+--
+ALTER TABLE `tb_observacoes_dia`
+  ADD CONSTRAINT `tb_observacoes_dia_ibfk_1` FOREIGN KEY (`resident_id`) REFERENCES `tb_residentes` (`id`) ON DELETE CASCADE;
+
+--
+-- Restrições para tabelas `tb_rotina_atividade`
+--
+ALTER TABLE `tb_rotina_atividade`
+  ADD CONSTRAINT `tb_rotina_atividade_ibfk_1` FOREIGN KEY (`rotina_id`) REFERENCES `tb_rotina_residente` (`id`) ON DELETE CASCADE;
+
+--
+-- Restrições para tabelas `tb_rotina_residente`
+--
+ALTER TABLE `tb_rotina_residente`
+  ADD CONSTRAINT `tb_rotina_residente_ibfk_1` FOREIGN KEY (`resident_id`) REFERENCES `tb_residentes` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
