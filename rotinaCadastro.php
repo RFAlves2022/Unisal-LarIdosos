@@ -1,12 +1,59 @@
 <?php
 include_once "header.php";
+include_once "dbConnection.php";
 
-// Exemplo de tratamento de POST (você pode adaptar para salvar no banco)
+// Buscar residentes para o select
+$residentes = [];
+try {
+    $stmt = $pdo->query("SELECT id, nome FROM tb_residentes ORDER BY nome");
+    $residentes = $stmt->fetchAll(PDO::FETCH_ASSOC);
+} catch (Exception $e) {
+    echo '<div class="alert alert-danger text-center">Erro ao buscar residentes: ' . htmlspecialchars($e->getMessage()) . '</div>';
+}
+
+// Cadastro da rotina e atividades
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // Aqui você pode salvar os dados no banco ou em arquivo
-    // Exemplo: $horaAcordar = $_POST['hora_acordar'];
-    // ...
-    echo '<div class="alert alert-success text-center">Rotina cadastrada/atualizada com sucesso!</div>';
+    try {
+        $pdo->beginTransaction();
+
+        $resident_id = $_POST['resident_id'];
+
+        $stmt = $pdo->prepare("INSERT INTO tb_rotina_residente (
+            resident_id, hora_acordar, hora_dormir, refeicao_cafe, refeicao_almoco, refeicao_lanche, refeicao_jantar,
+            medicacao_manha, medicacao_tarde, medicacao_noite, cuidados_especiais
+        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+        $stmt->execute([
+            $resident_id,
+            $_POST['hora_acordar'],
+            $_POST['hora_dormir'],
+            $_POST['refeicao_cafe'],
+            $_POST['refeicao_almoco'],
+            $_POST['refeicao_lanche'],
+            $_POST['refeicao_jantar'],
+            $_POST['medicacao_manha'],
+            $_POST['medicacao_tarde'],
+            $_POST['medicacao_noite'],
+            $_POST['cuidados_especiais']
+        ]);
+        $rotina_id = $pdo->lastInsertId();
+
+        $i = 1;
+        while (isset($_POST["atividade_hora_$i"]) && isset($_POST["atividade_desc_$i"])) {
+            $hora = $_POST["atividade_hora_$i"];
+            $desc = $_POST["atividade_desc_$i"];
+            if ($hora && $desc) {
+                $stmt = $pdo->prepare("INSERT INTO tb_rotina_atividade (rotina_id, hora, descricao) VALUES (?, ?, ?)");
+                $stmt->execute([$rotina_id, $hora, $desc]);
+            }
+            $i++;
+        }
+
+        $pdo->commit();
+        echo '<div class="alert alert-success text-center">Rotina cadastrada com sucesso!</div>';
+    } catch (Exception $e) {
+        $pdo->rollBack();
+        echo '<div class="alert alert-danger text-center">Erro ao cadastrar rotina: ' . htmlspecialchars($e->getMessage()) . '</div>';
+    }
 }
 ?>
 
@@ -17,13 +64,25 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <div class="col-xl-9 col-lg-10">
                     <div class="card shadow-lg border-0 rounded-4">
                         <div class="card-header bg-gradient" style="background: linear-gradient(90deg, #5D737E 60%, #64B6AC 100%);">
-                            <h2 class="mb-0 text-white text-center py-3 d-flex justify-content-center align-items-center gap-3">
+                            <h2 class="mb-0 text-center py-3 d-flex justify-content-center align-items-center gap-3">
                                 <i class="bi bi-pencil-square"></i> Cadastro/Alteração de Rotina do Residente
                             </h2>
                         </div>
                         <div class="card-body p-5">
                             <form method="POST" autocomplete="off">
                                 <div class="row g-4">
+                                    <!-- Select de Residente -->
+                                    <div class="col-12">
+                                        <label class="form-label fw-semibold">Residente</label>
+                                        <select name="resident_id" class="form-select" required>
+                                            <option value="">Selecione o residente</option>
+                                            <?php foreach ($residentes as $residente): ?>
+                                                <option value="<?= $residente['id'] ?>">
+                                                    <?= htmlspecialchars($residente['nome']) ?>
+                                                </option>
+                                            <?php endforeach; ?>
+                                        </select>
+                                    </div>
                                     <!-- Hora de Acordar e Dormir -->
                                     <div class="col-md-6">
                                         <label class="form-label fw-semibold">Hora de Acordar</label>
@@ -66,42 +125,26 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                     <!-- Atividades Programadas -->
                                     <div class="col-12">
                                         <label class="form-label fw-semibold">Atividades Programadas</label>
-                                        <div class="row g-2">
-                                            <div class="col-md-3">
-                                                <input type="time" class="form-control mb-1" name="atividade_hora_1" placeholder="Hora">
+                                        <div id="atividades-lista" class="row g-2">
+                                            <?php for ($i = 1; $i <= 4; $i++): ?>
+                                            <div class="col-md-3 atividade-item">
+                                                <input type="time" class="form-control mb-1" name="atividade_hora_<?= $i ?>" placeholder="Hora">
                                             </div>
-                                            <div class="col-md-9">
-                                                <input type="text" class="form-control mb-1" name="atividade_desc_1" placeholder="Descrição da atividade">
+                                            <div class="col-md-9 atividade-item">
+                                                <input type="text" class="form-control mb-1" name="atividade_desc_<?= $i ?>" placeholder="Descrição da atividade">
                                             </div>
-                                            <div class="col-md-3">
-                                                <input type="time" class="form-control mb-1" name="atividade_hora_2" placeholder="Hora">
-                                            </div>
-                                            <div class="col-md-9">
-                                                <input type="text" class="form-control mb-1" name="atividade_desc_2" placeholder="Descrição da atividade">
-                                            </div>
-                                            <div class="col-md-3">
-                                                <input type="time" class="form-control mb-1" name="atividade_hora_3" placeholder="Hora">
-                                            </div>
-                                            <div class="col-md-9">
-                                                <input type="text" class="form-control mb-1" name="atividade_desc_3" placeholder="Descrição da atividade">
-                                            </div>
-                                            <div class="col-md-3">
-                                                <input type="time" class="form-control mb-1" name="atividade_hora_4" placeholder="Hora">
-                                            </div>
-                                            <div class="col-md-9">
-                                                <input type="text" class="form-control mb-1" name="atividade_desc_4" placeholder="Descrição da atividade">
-                                            </div>
+                                            <?php endfor; ?>
+                                        </div>
+                                        <div class="text-end mt-2">
+                                            <button type="button" class="btn btn-outline-primary btn-sm" id="add-atividade-btn">
+                                                <i class="bi bi-plus-circle"></i> Nova Atividade
+                                            </button>
                                         </div>
                                     </div>
                                     <!-- Cuidados Especiais -->
                                     <div class="col-12">
                                         <label class="form-label fw-semibold">Cuidados Especiais</label>
                                         <textarea class="form-control" name="cuidados_especiais" rows="2" placeholder="Descreva os cuidados especiais"></textarea>
-                                    </div>
-                                    <!-- Observações do Dia -->
-                                    <div class="col-12">
-                                        <label class="form-label fw-semibold">Observações do Dia</label>
-                                        <textarea class="form-control" name="observacoes" rows="2" placeholder="Observações gerais"></textarea>
                                     </div>
                                 </div>
                                 <div class="text-center mt-4">
@@ -121,7 +164,35 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </section>
 </main>
 
-<!-- Bootstrap Icons CDN (adicione no <head> do seu header.php se ainda não tiver) -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+<script>
+let atividadeCount = 4;
+document.getElementById('add-atividade-btn').addEventListener('click', function() {
+    atividadeCount++;
+    const lista = document.getElementById('atividades-lista');
+    const row = document.createElement('div');
+    row.className = 'col-md-3 atividade-item';
+    row.innerHTML = `<input type="time" class="form-control mb-1" name="atividade_hora_${atividadeCount}" placeholder="Hora">`;
+    lista.appendChild(row);
+
+    const row2 = document.createElement('div');
+    row2.className = 'col-md-9 atividade-item';
+    row2.innerHTML = `<input type="text" class="form-control mb-1" name="atividade_desc_${atividadeCount}" placeholder="Descrição da atividade">`;
+    lista.appendChild(row2);
+});
+
+document.querySelector('form').addEventListener('input', function() {
+    let filled = true;
+    for (let i = 1; i <= 4; i++) {
+        if (
+            !document.querySelector(`[name="atividade_hora_${i}"]`).value ||
+            !document.querySelector(`[name="atividade_desc_${i}"]`).value
+        ) {
+            filled = false;
+            break;
+        }
+    }
+    document.getElementById('add-atividade-btn').disabled = !filled;
+});
+</script>
 
 <?php include_once "footer.php"; ?>

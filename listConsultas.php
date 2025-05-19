@@ -52,9 +52,27 @@ include_once "consultasQuerys.php"; // Inclui o backend de consultas
                         </tr>
                     </thead>
                     <tbody>
+                        <?php
+                        // Ordena as consultas por data e horário mais próximos
+                        usort($consultas, function($a, $b) {
+                            $dataA = strtotime($a['data_consulta'] . ' ' . $a['horario']);
+                            $dataB = strtotime($b['data_consulta'] . ' ' . $b['horario']);
+                            return $dataA <=> $dataB;
+                        });
+                        $hoje = strtotime(date('Y-m-d'));
+                        ?>
                         <?php if (count($consultas) > 0): ?>
                             <?php foreach ($consultas as $consulta): ?>
-                                <tr class="editable-row"
+                                <?php
+                                    $dataConsulta = strtotime($consulta['data_consulta']);
+                                    $rowClass = '';
+                                    if ($dataConsulta < $hoje) {
+                                        $rowClass = 'table-danger';
+                                    } elseif ($dataConsulta === $hoje) {
+                                        $rowClass = 'table-success';
+                                    }
+                                ?>
+                                <tr class="editable-row <?= $rowClass ?>"
                                     data-id="<?= $consulta['id'] ?>"
                                     data-resident_id="<?= $consulta['resident_id'] ?>"
                                     data-data_consulta="<?= $consulta['data_consulta'] ?>"
@@ -156,5 +174,19 @@ include_once "consultasQuerys.php"; // Inclui o backend de consultas
 </main>
 
 <script src="consultasEvents.js"></script>
+<script>
+// Adiciona destaque amarelo à linha clicada
+document.addEventListener('DOMContentLoaded', function() {
+    const rows = document.querySelectorAll('.editable-row');
+    rows.forEach(row => {
+        row.addEventListener('click', function() {
+            // Remove destaque de todas as linhas
+            rows.forEach(r => r.classList.remove('table-warning'));
+            // Adiciona destaque à linha clicada
+            this.classList.add('table-warning');
+        });
+    });
+});
+</script>
 
 <?php include_once "footer.php"; ?>

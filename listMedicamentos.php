@@ -146,5 +146,17 @@ require "medQuerys.php";
         <?php endif; ?>
     });
 </script>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const rows = document.querySelectorAll('.editable-row');
+    rows.forEach(row => {
+        row.addEventListener('click', function() {
+            rows.forEach(r => r.classList.remove('table-warning'));
+            this.classList.add('table-warning');
+        });
+    });
+});
+</script>
   
 <?php include_once "footer.php"; ?>
