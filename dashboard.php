@@ -42,85 +42,79 @@ include_once "dashboardQuerys.php";
                     <p class="mt-2 fw-bold" style="color: #5D737E;">Rotina</p>
                 </a>
             </div>
-
-            
-
         </div>
     </div>
     <div class="container mt-1">
-    <div class="row">
-        <!-- Tabela de Consultas -->
-        <div class="col-md-6 mb-4">
-            <div class="card bg-white shadow-sm rounded-lg h-100">
-                <div class="card-body">
-                    <h4 class="mb-4 text-center color1">Consultas agendadas <?= date('d/m/Y') ?></h4>
-                    <?php if (count($consultasHoje) > 0): ?>
+        <div class="row">
+            <div class="col-md-6 mb-4">
+                <div class="card bg-white shadow-sm rounded-lg h-100">
+                    <div class="card-body">
+                        <h4 class="mb-4 text-center color1">Consultas agendadas <?= date('d/m/Y') ?></h4>
+                        <?php if (count($consultasHoje) > 0): ?>
+                            <div class="table-responsive table-rounded" style="max-height: 400px; overflow-y: auto;">
+                                <table class="table table-bordered table-striped mb-0 text-center">
+                                    <thead class="table-light">
+                                        <tr>
+                                            <th>Paciente</th>
+                                            <th>Horário</th>
+                                            <th>Médico</th>
+                                            <th>Especialidade</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <?php foreach ($consultasHoje as $c): ?>
+                                            <tr>
+                                                <td><?= htmlspecialchars($c['paciente']) ?></td>
+                                                <td><?= substr($c['horario'], 0, 5) ?></td>
+                                                <td><?= htmlspecialchars($c['medico']) ?></td>
+                                                <td><?= htmlspecialchars($c['especialidade']) ?></td>
+                                            </tr>
+                                        <?php endforeach; ?>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <?php else: ?>
+                            <p class="text-center text-muted mt-3">Nenhuma consulta agendada para hoje.</p>
+                        <?php endif; ?>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 mb-4">
+                <div class="card bg-white shadow-sm rounded-lg h-100">
+                    <div class="card-body">
+                        <h4 class="mb-4 text-center color1">Medicação diária</h4>
                         <div class="table-responsive table-rounded" style="max-height: 400px; overflow-y: auto;">
                             <table class="table table-bordered table-striped mb-0 text-center">
                                 <thead class="table-light">
                                     <tr>
-                                        <th>Paciente</th>
                                         <th>Horário</th>
-                                        <th>Médico</th>
-                                        <th>Especialidade</th>
+                                        <th>Medicação</th>
+                                        <th>Dosagem</th>
+                                        <th>Paciente</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <?php foreach ($consultasHoje as $c): ?>
+                                    <?php if (count($medicamentos) > 0): ?>
+                                        <?php foreach ($medicamentos as $med): ?>
+                                            <tr>
+                                                <td><?= htmlspecialchars(substr($med['horario'], 0, 5)) ?></td>
+                                                <td><?= htmlspecialchars($med['medicacao']) ?></td>
+                                                <td><?= htmlspecialchars($med['dosagem']) ?></td>
+                                                <td><?= htmlspecialchars($med['paciente']) ?></td>
+                                            </tr>
+                                        <?php endforeach; ?>
+                                    <?php else: ?>
                                         <tr>
-                                            <td><?= htmlspecialchars($c['paciente']) ?></td>
-                                            <td><?= substr($c['horario'], 0, 5) ?></td>
-                                            <td><?= htmlspecialchars($c['medico']) ?></td>
-                                            <td><?= htmlspecialchars($c['especialidade']) ?></td>
+                                            <td colspan="4" class="text-center">Nenhum medicamento encontrado.</td>
                                         </tr>
-                                    <?php endforeach; ?>
+                                    <?php endif; ?>
                                 </tbody>
                             </table>
                         </div>
-                    <?php else: ?>
-                        <p class="text-center text-muted mt-3">Nenhuma consulta agendada para hoje.</p>
-                    <?php endif; ?>
-                </div>
-            </div>
-        </div>
-
-        <!-- Tabela de Medicamentos -->
-        <div class="col-md-6 mb-4">
-            <div class="card bg-white shadow-sm rounded-lg h-100">
-                <div class="card-body">
-                    <h4 class="mb-4 text-center color1">Medicação diária</h4>
-                    <div class="table-responsive table-rounded" style="max-height: 400px; overflow-y: auto;">
-                        <table class="table table-bordered table-striped mb-0 text-center">
-                            <thead class="table-light">
-                                <tr>
-                                    <th>Horário</th>
-                                    <th>Medicação</th>
-                                    <th>Dosagem</th>
-                                    <th>Paciente</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <?php if (count($medicamentos) > 0): ?>
-                                    <?php foreach ($medicamentos as $med): ?>
-                                        <tr>
-                                            <td><?= htmlspecialchars(substr($med['horario'], 0, 5)) ?></td>
-                                            <td><?= htmlspecialchars($med['medicacao']) ?></td>
-                                            <td><?= htmlspecialchars($med['dosagem']) ?></td>
-                                            <td><?= htmlspecialchars($med['paciente']) ?></td>
-                                        </tr>
-                                    <?php endforeach; ?>
-                                <?php else: ?>
-                                    <tr>
-                                        <td colspan="4" class="text-center">Nenhum medicamento encontrado.</td>
-                                    </tr>
-                                <?php endif; ?>
-                            </tbody>
-                        </table>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
     </div>
 </main>
 

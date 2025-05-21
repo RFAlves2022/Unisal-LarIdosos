@@ -5,7 +5,6 @@ if (!isset($_SESSION['username']) || $_SESSION['username'] !== 'admin') {
     exit();
 }
 
-// Processa a alteração de senha
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['user_id'], $_POST['new_password'])) {
     $userId = $_POST['user_id'];
     $newPassword = password_hash($_POST['new_password'], PASSWORD_DEFAULT);
@@ -26,12 +25,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['user_id'], $_POST['ne
     }
 }
 
-// Processa a exclusão de um usuário
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['delete_user_id'])) {
     $userId = $_POST['delete_user_id'];
 
     try {
-        // Verifica se o usuário a ser deletado é o admin
         $stmt = $pdo->prepare("SELECT username FROM tb_users WHERE id = :id");
         $stmt->execute([':id' => $userId]);
         $user = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -39,7 +36,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['delete_user_id'])) {
         if ($user && $user['username'] === 'admin') {
             $_SESSION['error'] = "O usuário admin não pode ser deletado.";
         } else {
-            // Deleta o usuário
             $stmt = $pdo->prepare("DELETE FROM tb_users WHERE id = :id");
             $stmt->execute([':id' => $userId]);
             $_SESSION['message'] = "Usuário ID $userId deletado com sucesso.";
@@ -53,7 +49,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['delete_user_id'])) {
     }
 }
 
-// Processa o cadastro de um novo usuário
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['new_username'], $_POST['new_password'])) {
     $newUsername = $_POST['new_username'];
     $newPassword = password_hash($_POST['new_password'], PASSWORD_DEFAULT);
@@ -74,7 +69,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['new_username'], $_POS
     }
 }
 
-// Busca os usuários do banco de dados
 try {
     $stmt = $pdo->query("SELECT id, username, data_criacao FROM tb_users ORDER BY data_criacao DESC");
     $users = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -82,9 +76,6 @@ try {
     $_SESSION['error'] = "Erro ao buscar usuários: " . $e->getMessage();
     $users = [];
 }
-
-
-//Exibição de mensagens
 
 if (isset($_SESSION['message'])) {
     echo "<div class='alert alert-success alert-dismissible fade show' role='alert'>";
@@ -101,4 +92,3 @@ if (isset($_SESSION['error'])) {
     echo "</div>";
     unset($_SESSION['error']);
 }
-?>

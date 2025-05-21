@@ -2,7 +2,6 @@
 include_once "header.php"; 
 include_once "dbConnection.php";
 
-// Buscar apenas residentes que possuem rotina criada
 $residentes = [];
 try {
     $stmt = $pdo->query("
@@ -17,7 +16,6 @@ try {
     echo '<div class="alert alert-danger text-center">Erro ao buscar residentes: ' . htmlspecialchars($e->getMessage()) . '</div>';
 }
 
-// Cadastro de nova observação do dia (data/hora automáticas)
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['nova_observacao'])) {
     $residente_id = $_POST['residente_id'];
     $observacao = trim($_POST['observacao']);
@@ -33,7 +31,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['nova_observacao'])) {
     }
 }
 
-// Busca o residente selecionado (por id)
 $residente_id = $_GET['residente_id'] ?? ($_POST['residente_id'] ?? '');
 $residente = null;
 $rotina = null;
@@ -41,31 +38,26 @@ $atividades = [];
 $cuidados = '';
 $observacoes = [];
 
-// Buscar residente pelo id
 if ($residente_id) {
     $stmt = $pdo->prepare("SELECT * FROM tb_residentes WHERE id = ?");
     $stmt->execute([$residente_id]);
     $residente = $stmt->fetch(PDO::FETCH_ASSOC);
 
     if ($residente) {
-        // Busca rotina do residente
         $stmt = $pdo->prepare("SELECT * FROM tb_rotina_residente WHERE resident_id = ? ORDER BY criado_em DESC LIMIT 1");
         $stmt->execute([$residente['id']]);
         $rotina = $stmt->fetch(PDO::FETCH_ASSOC);
 
         if ($rotina) {
-            // Busca atividades
             $stmt = $pdo->prepare("SELECT * FROM tb_rotina_atividade WHERE rotina_id = ? ORDER BY hora");
             $stmt->execute([$rotina['id']]);
             $atividades = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-            // Cuidados especiais
             $cuidados = $rotina['cuidados_especiais'];
         }
     }
 }
 
-// Buscar observações do dia para o residente selecionado
 $observacoes = [];
 if ($residente_id) {
     $stmt = $pdo->prepare("SELECT observacao, data_hora FROM tb_observacoes_dia WHERE resident_id = ? ORDER BY data_hora DESC");
@@ -86,11 +78,6 @@ if ($residente_id) {
                                     <i class="bi bi-calendar2-week"></i> Rotina Diária do Residente
                                 </h2>
                                 <div class="position-absolute top-50 end-0 translate-middle-y d-flex align-items-center gap-2 me-3">
-                                    <!-- Ícone de Alertas -->
-                                    <button type="button" class="btn btn-link p-0 align-middle" data-bs-toggle="modal" data-bs-target="#alertasModal" title="Ver Alertas">
-                                        <i class="bi bi-bell-fill fs-3 text-warning"></i>
-                                    </button>
-                                    <!-- Ícone para ir para rotinaCadastro.php -->
                                     <a href="rotinaCadastro.php" class="btn btn-link p-0 align-middle" title="Cadastrar/Editar Rotina" >
                                         <i class="bi bi-pencil-square fs-3 color1"></i>
                                     </a>
@@ -98,7 +85,6 @@ if ($residente_id) {
                             </div>
                         </div>
                         <div class="card-body p-2">
-                            <!-- Barra de pesquisa de residente substituída por select -->
                             <form class="d-flex justify-content-center align-items-center mb-4" method="get" action="rotina.php">
                                 <div class="input-group" style="max-width: 400px;">
                                     <select class="form-select" name="residente_id" required>
@@ -116,7 +102,6 @@ if ($residente_id) {
                             </form>
                             <?php if ($residente && $rotina): ?>
                             <div class="row g-4">
-                                <!-- Hora de Acordar -->
                                 <div class="col-md-6">
                                     <div class="card border-0 shadow-sm" style="min-height: 120px;">
                                         <div class="card-body text-center py-3">
@@ -126,7 +111,6 @@ if ($residente_id) {
                                         </div>
                                     </div>
                                 </div>
-                                <!-- Hora de Dormir -->
                                 <div class="col-md-6">
                                     <div class="card border-0 shadow-sm" style="min-height: 120px;">
                                         <div class="card-body text-center py-3">
@@ -136,7 +120,7 @@ if ($residente_id) {
                                         </div>
                                     </div>
                                 </div>
-                                <!-- Horários das Refeições -->
+
                                 <div class="col-md-6">
                                     <div class="card border-0 shadow-sm h-100">
                                         <div class="card-body">
@@ -159,7 +143,6 @@ if ($residente_id) {
                                         </div>
                                     </div>
                                 </div>
-                                <!-- Horários das Medicações -->
                                 <div class="col-md-6">
                                     <div class="card border-0 shadow-sm h-100">
                                         <div class="card-body">
@@ -179,7 +162,6 @@ if ($residente_id) {
                                         </div>
                                     </div>
                                 </div>
-                                <!-- Atividades Programadas -->
                                 <div class="col-md-6">
                                     <div class="card border-0 shadow-sm h-100">
                                         <div class="card-body">
@@ -195,7 +177,6 @@ if ($residente_id) {
                                         </div>
                                     </div>
                                 </div>
-                                <!-- Cuidados Especiais -->
                                 <div class="col-md-6">
                                     <div class="card border-0 shadow-sm h-100">
                                         <div class="card-body">
@@ -207,7 +188,6 @@ if ($residente_id) {
                                         </div>
                                     </div>
                                 </div>
-                                <!-- Observações do Dia -->
                                 <div class="col-12">
                                     <div class="card border-0 shadow-sm h-100">
                                         <div class="card-body">
@@ -235,7 +215,6 @@ if ($residente_id) {
                                         </div>
                                     </div>
                                 </div>
-                                <!-- Modal de Alertas -->
                                 <div class="modal fade" id="alertasModal" tabindex="-1" aria-labelledby="alertasModalLabel" aria-hidden="true">
                                     <div class="modal-dialog modal-dialog-centered">
                                         <div class="modal-content">
@@ -258,20 +237,19 @@ if ($residente_id) {
                                         </div>
                                     </div>
                                 </div>
-                                <!-- Fim Modal de Alertas -->
-                            </div><!-- row -->
+
+                            </div>
                             <?php elseif ($residente_id): ?>
                                 <div class="alert alert-warning text-center mt-4">Residente não encontrado ou sem rotina cadastrada.</div>
                             <?php endif; ?>
-                        </div><!-- card-body -->
-                    </div><!-- card -->
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 </main>
 
-<!-- Modal Nova Observação -->
 <div class="modal fade" id="novaObservacaoModal" tabindex="-1" aria-labelledby="novaObservacaoModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -298,6 +276,5 @@ if ($residente_id) {
   </div>
 </div>
 
-<!-- Bootstrap Icons CDN (adicione no <head> do seu header.php se ainda não tiver) -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 <?php include_once "footer.php"; ?>

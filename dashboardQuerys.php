@@ -2,7 +2,6 @@
 $dataHoje = date('Y-m-d');
 
 try {
-    // Consulta para buscar as consultas de hoje
     $sqlHoje = "
         SELECT 
             r.nome AS paciente,
@@ -24,7 +23,6 @@ try {
 }
 
 try {
-    // Consulta para buscar todas as consultas
     $sqlTodas = "
         SELECT 
             r.nome AS paciente,
@@ -44,7 +42,6 @@ try {
 }
 
 try {
-    // Consulta para buscar os medicamentos
     $sqlMedicamentos = "
         SELECT 
             m.horario,
@@ -62,4 +59,3 @@ try {
 } catch (PDOException $e) {
     die("Erro ao buscar medicamentos: " . $e->getMessage());
 }
-?>

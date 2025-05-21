@@ -19,14 +19,12 @@ if (!empty($search)) {
 
 $consultas = $query->fetchAll(PDO::FETCH_ASSOC);
 
-// Lógica de CRUD
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($_POST['action'])) {
         $action = $_POST['action'];
 
         try {
             if ($action === 'create') {
-                // Cadastro de nova consulta
                 $resident_id = $_POST['resident_id'];
                 $data_consulta = $_POST['data_consulta'];
                 $horario = $_POST['horario'];
@@ -50,7 +48,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 ]);
                 $_SESSION['message'] = 'Consulta cadastrada com sucesso!';
             } elseif ($action === 'update') {
-                // Atualização de consulta
                 $id = $_POST['id'];
                 $resident_id = $_POST['resident_id'];
                 $data_consulta = $_POST['data_consulta'];
@@ -78,9 +75,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 ]);
                 $_SESSION['message'] = 'Consulta atualizada com sucesso!';
             } elseif ($action === 'delete') {
-                // Exclusão de consulta
                 $id = $_POST['id'];
-
                 $stmt = $pdo->prepare("DELETE FROM tb_consultas WHERE id = :id");
                 $stmt->execute([':id' => $id]);
                 $_SESSION['message'] = 'Consulta excluída com sucesso!';
@@ -89,9 +84,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $_SESSION['error'] = 'Ocorreu um erro: ' . $e->getMessage();
         }
 
-        // Redireciona para evitar reenvio do formulário
         header("Location: listConsultas.php");
         exit;
     }
 }
-?>

@@ -15,10 +15,7 @@ require_once "profileQuerys.php";
                         <hr>
                         <p class="card-text"><strong>Nome:</strong> <?php echo $_SESSION['username']; ?></p>
                         <p class="card-text"><strong>Data de Criação:</strong> <?php echo date('d/m/Y', strtotime($_SESSION['data_criacao'])); ?></p>
-                        
                         <a href="#" class="btn mt-5 text-white" data-bs-toggle="modal" data-bs-target="#changePasswordModal" style="background-color: #5D737E;">Alterar Senha</a>
-
-                        <!-- Modal -->
                         <div class="modal fade" id="changePasswordModal" tabindex="-1" aria-labelledby="changePasswordModalLabel" aria-hidden="true">
                             <div class="modal-dialog">
                                 <div class="modal-content">

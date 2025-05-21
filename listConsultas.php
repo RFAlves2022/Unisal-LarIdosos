@@ -1,8 +1,8 @@
 <?php
 include_once "header.php";
-include_once "dbConnection.php"; // Inclui a conexão com o banco de dados
+include_once "dbConnection.php"; 
 $search = $_GET['search'] ?? '';
-include_once "consultasQuerys.php"; // Inclui o backend de consultas
+include_once "consultasQuerys.php";
 ?>
 
 <main class="container mt-4 mb-5">
@@ -53,7 +53,6 @@ include_once "consultasQuerys.php"; // Inclui o backend de consultas
                     </thead>
                     <tbody>
                         <?php
-                        // Ordena as consultas por data e horário mais próximos
                         usort($consultas, function($a, $b) {
                             $dataA = strtotime($a['data_consulta'] . ' ' . $a['horario']);
                             $dataB = strtotime($b['data_consulta'] . ' ' . $b['horario']);
@@ -106,7 +105,7 @@ include_once "consultasQuerys.php"; // Inclui o backend de consultas
                 </table>
             </div>
 
-            <!-- Formulário para cadastrar ou editar consulta -->
+            <!-- Formulário consulta -->
             <div class="mt-4">
                 <h4 class="text-center color1">Gerenciar Consulta</h4>
                 <form method="POST" class="mt-3">
@@ -175,14 +174,11 @@ include_once "consultasQuerys.php"; // Inclui o backend de consultas
 
 <script src="consultasEvents.js"></script>
 <script>
-// Adiciona destaque amarelo à linha clicada
 document.addEventListener('DOMContentLoaded', function() {
     const rows = document.querySelectorAll('.editable-row');
     rows.forEach(row => {
         row.addEventListener('click', function() {
-            // Remove destaque de todas as linhas
             rows.forEach(r => r.classList.remove('table-warning'));
-            // Adiciona destaque à linha clicada
             this.classList.add('table-warning');
         });
     });

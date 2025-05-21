@@ -1,26 +1,22 @@
 <?php
 include_once "header.php";
-
-// Verifica se há uma pesquisa
 $search = $_GET['search'] ?? '';
 
-// Consulta ao banco de dados com filtro de pesquisa
 if (!empty($search)) {
   $sql = $pdo->prepare("SELECT * FROM tb_residentes WHERE nome LIKE :search ORDER BY nome ASC");
   $sql->bindValue(':search', '%' . $search . '%');
   $sql->execute();
 } else {
-  $sql = $pdo->query("SELECT * FROM tb_residentes ORDER BY nome ASC"); // Seleciona todos os campos
+  $sql = $pdo->query("SELECT * FROM tb_residentes ORDER BY nome ASC");
 }
 
 $residentes = $sql->fetchAll(PDO::FETCH_ASSOC);
 
-// Função para calcular a idade
 function calcularIdade($data_nasc)
 {
   $nasc = new DateTime($data_nasc);
   $hoje = new DateTime();
-  return $nasc->diff($hoje)->y; // diferença em anos
+  return $nasc->diff($hoje)->y;
 }
 ?>
 
@@ -41,14 +37,14 @@ function calcularIdade($data_nasc)
         </div>
       </form>
 
-      <!-- Link "Cadastrar Novo" alinhado com a lista -->
+      <!-- Cadastrar Novo-->
       <div class="d-flex justify-content-between align-items-center mb-3" style="max-width: 700px; margin: 0 auto;">
         <p class="mb-0 text-muted">Total de Residentes: <strong><?= count($residentes) ?></strong></p>
         <a href="frmCadResidente.php" class="color1">Cadastrar Novo</a>
       </div>
 
       <?php if (count($residentes) > 0): ?>
-        <div class="list-group mx-auto" style="max-width: 700px;"> <!-- Diminuindo a largura -->
+        <div class="list-group mx-auto" style="max-width: 700px;">
           <?php foreach ($residentes as $res): ?>
             <div class="list-group-item list-group-item-action d-flex justify-content-between align-items-center p-3 shadow-sm rounded"
               data-bs-toggle="modal" data-bs-target="#residenteModal"
@@ -68,7 +64,7 @@ function calcularIdade($data_nasc)
               data-responsavel_email="<?= htmlspecialchars($res['responsavel_email']) ?>"
               data-parente_grau="<?= htmlspecialchars($res['parente_grau']) ?>">
               <div class="d-flex align-items-center">
-                <i class="bi bi-person-circle fs-3 text-primary me-3"></i> <!-- Ícone menor -->
+                <i class="bi bi-person-circle fs-3 text-primary me-3"></i>
                 <div>
                   <h6 class="mb-0"><?= htmlspecialchars($res['nome']) ?></h6>
                   <small class="text-muted">Idade: <?= calcularIdade($res['data_nasc']) ?> anos</small>
@@ -85,7 +81,6 @@ function calcularIdade($data_nasc)
   </div>
 </main>
 
-<!-- Modal -->
 <div class="modal fade" id="residenteModal" tabindex="-1" aria-labelledby="residenteModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
@@ -122,13 +117,11 @@ function calcularIdade($data_nasc)
 </div>
 
 <script>
-  // Preenche o modal com os dados do residente
   const residenteModal = document.getElementById('residenteModal');
   residenteModal.addEventListener('show.bs.modal', function(event) {
-    const button = event.relatedTarget; // Botão que acionou o modal
+    const button = event.relatedTarget;
     const modal = residenteModal.querySelector('.modal-body');
 
-    // Preenche os campos do modal com os dados do botão
     modal.querySelector('#modal-nome').textContent = button.getAttribute('data-nome');
     modal.querySelector('#modal-data_nasc').textContent = button.getAttribute('data-data_nasc');
     modal.querySelector('#modal-cpf').textContent = button.getAttribute('data-cpf');
@@ -145,7 +138,6 @@ function calcularIdade($data_nasc)
     modal.querySelector('#modal-responsavel_email').textContent = button.getAttribute('data-responsavel_email');
     modal.querySelector('#modal-parente_grau').textContent = button.getAttribute('data-parente_grau');
 
-    // Preenche o campo oculto do formulário de exclusão
     document.getElementById('modal-cpf-hidden').value = button.getAttribute('data-cpf');
   });
 </script>

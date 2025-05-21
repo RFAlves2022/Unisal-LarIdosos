@@ -2,7 +2,6 @@
 include_once "header.php";
 include_once "dbConnection.php";
 
-// Buscar residentes para o select
 $residentes = [];
 try {
     $stmt = $pdo->query("SELECT id, nome FROM tb_residentes ORDER BY nome");
@@ -11,7 +10,6 @@ try {
     echo '<div class="alert alert-danger text-center">Erro ao buscar residentes: ' . htmlspecialchars($e->getMessage()) . '</div>';
 }
 
-// Cadastro da rotina e atividades
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     try {
         $pdo->beginTransaction();
@@ -71,7 +69,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         <div class="card-body p-5">
                             <form method="POST" autocomplete="off">
                                 <div class="row g-4">
-                                    <!-- Select de Residente -->
+
                                     <div class="col-12">
                                         <label class="form-label fw-semibold">Residente</label>
                                         <select name="resident_id" class="form-select" required>
@@ -83,7 +81,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                             <?php endforeach; ?>
                                         </select>
                                     </div>
-                                    <!-- Hora de Acordar e Dormir -->
+
                                     <div class="col-md-6">
                                         <label class="form-label fw-semibold">Hora de Acordar</label>
                                         <input type="time" class="form-control" name="hora_acordar" required>
@@ -92,7 +90,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                         <label class="form-label fw-semibold">Hora de Dormir</label>
                                         <input type="time" class="form-control" name="hora_dormir" required>
                                     </div>
-                                    <!-- Horários das Refeições -->
+
                                     <div class="col-md-3">
                                         <label class="form-label">Café da manhã</label>
                                         <input type="time" class="form-control" name="refeicao_cafe" required>
@@ -122,17 +120,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                         <label class="form-label">Medicação Noite</label>
                                         <input type="time" class="form-control" name="medicacao_noite" required>
                                     </div>
-                                    <!-- Atividades Programadas -->
+
                                     <div class="col-12">
                                         <label class="form-label fw-semibold">Atividades Programadas</label>
                                         <div id="atividades-lista" class="row g-2">
                                             <?php for ($i = 1; $i <= 4; $i++): ?>
-                                            <div class="col-md-3 atividade-item">
-                                                <input type="time" class="form-control mb-1" name="atividade_hora_<?= $i ?>" placeholder="Hora">
-                                            </div>
-                                            <div class="col-md-9 atividade-item">
-                                                <input type="text" class="form-control mb-1" name="atividade_desc_<?= $i ?>" placeholder="Descrição da atividade">
-                                            </div>
+                                                <div class="col-md-3 atividade-item">
+                                                    <input type="time" class="form-control mb-1" name="atividade_hora_<?= $i ?>" placeholder="Hora">
+                                                </div>
+                                                <div class="col-md-9 atividade-item">
+                                                    <input type="text" class="form-control mb-1" name="atividade_desc_<?= $i ?>" placeholder="Descrição da atividade">
+                                                </div>
                                             <?php endfor; ?>
                                         </div>
                                         <div class="text-end mt-2">
@@ -141,7 +139,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                             </button>
                                         </div>
                                     </div>
-                                    <!-- Cuidados Especiais -->
+
                                     <div class="col-12">
                                         <label class="form-label fw-semibold">Cuidados Especiais</label>
                                         <textarea class="form-control" name="cuidados_especiais" rows="2" placeholder="Descreva os cuidados especiais"></textarea>
@@ -165,34 +163,34 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 </main>
 
 <script>
-let atividadeCount = 4;
-document.getElementById('add-atividade-btn').addEventListener('click', function() {
-    atividadeCount++;
-    const lista = document.getElementById('atividades-lista');
-    const row = document.createElement('div');
-    row.className = 'col-md-3 atividade-item';
-    row.innerHTML = `<input type="time" class="form-control mb-1" name="atividade_hora_${atividadeCount}" placeholder="Hora">`;
-    lista.appendChild(row);
+    let atividadeCount = 4;
+    document.getElementById('add-atividade-btn').addEventListener('click', function() {
+        atividadeCount++;
+        const lista = document.getElementById('atividades-lista');
+        const row = document.createElement('div');
+        row.className = 'col-md-3 atividade-item';
+        row.innerHTML = `<input type="time" class="form-control mb-1" name="atividade_hora_${atividadeCount}" placeholder="Hora">`;
+        lista.appendChild(row);
 
-    const row2 = document.createElement('div');
-    row2.className = 'col-md-9 atividade-item';
-    row2.innerHTML = `<input type="text" class="form-control mb-1" name="atividade_desc_${atividadeCount}" placeholder="Descrição da atividade">`;
-    lista.appendChild(row2);
-});
+        const row2 = document.createElement('div');
+        row2.className = 'col-md-9 atividade-item';
+        row2.innerHTML = `<input type="text" class="form-control mb-1" name="atividade_desc_${atividadeCount}" placeholder="Descrição da atividade">`;
+        lista.appendChild(row2);
+    });
 
-document.querySelector('form').addEventListener('input', function() {
-    let filled = true;
-    for (let i = 1; i <= 4; i++) {
-        if (
-            !document.querySelector(`[name="atividade_hora_${i}"]`).value ||
-            !document.querySelector(`[name="atividade_desc_${i}"]`).value
-        ) {
-            filled = false;
-            break;
+    document.querySelector('form').addEventListener('input', function() {
+        let filled = true;
+        for (let i = 1; i <= 4; i++) {
+            if (
+                !document.querySelector(`[name="atividade_hora_${i}"]`).value ||
+                !document.querySelector(`[name="atividade_desc_${i}"]`).value
+            ) {
+                filled = false;
+                break;
+            }
         }
-    }
-    document.getElementById('add-atividade-btn').disabled = !filled;
-});
+        document.getElementById('add-atividade-btn').disabled = !filled;
+    });
 </script>
 
 <?php include_once "footer.php"; ?>

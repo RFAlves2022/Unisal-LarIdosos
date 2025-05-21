@@ -1,19 +1,17 @@
-<?php 
+<?php
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 
-// Verifica se o usuário está logado
 if (!isset($_SESSION['user_id'])) {
     $_SESSION['error'] = "Você precisa estar logado para acessar esta página.";
     header("Location: login.php");
     exit();
 }
 
-$userId = $_SESSION['user_id']; // Obtém o ID do usuário logado
+$userId = $_SESSION['user_id'];
 
 try {
-    // Busca o nome e a data de criação do usuário
     $stmt = $pdo->prepare("SELECT username, data_criacao FROM tb_users WHERE id = :id");
     $stmt->execute([':id' => $userId]);
     $user = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -32,13 +30,12 @@ try {
     exit();
 }
 
-// Lógica para alteração de senha
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $currentPassword = $_POST['currentPassword'];
     $newPassword = $_POST['newPassword'];
 
     try {
-        // Verifica se o usuário existe e obtém a senha atual
         $stmt = $pdo->prepare("SELECT password FROM tb_users WHERE id = :id AND username = :username");
         $stmt->execute([
             ':id' => $userId,
@@ -47,7 +44,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
         if ($user && password_verify($currentPassword, $user['password'])) {
-            // Atualiza a senha com a nova senha criptografada
             $hashedPassword = password_hash($newPassword, PASSWORD_DEFAULT);
             $updateStmt = $pdo->prepare("UPDATE tb_users SET password = :newPassword WHERE id = :id AND username = :username");
             $updateStmt->execute([
@@ -64,7 +60,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $_SESSION['error'] = "Erro ao alterar a senha: " . $e->getMessage();
     }
 
-    // Redireciona para evitar reenvio do formulário
+
     header("Location: profile.php");
     exit();
 }
@@ -84,4 +80,3 @@ if (isset($_SESSION['error'])) {
     echo "</div>";
     unset($_SESSION['error']);
 }
-?>

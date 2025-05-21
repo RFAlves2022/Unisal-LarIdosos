@@ -1,6 +1,6 @@
 <?php
 include_once "header.php";
-include_once "cadastrarResidente.php"; // Inclui o script de cadastro de residente
+include_once "cadastrarResidente.php";
 ?>
 
 <main class="container mt-4">
@@ -13,7 +13,6 @@ include_once "cadastrarResidente.php"; // Inclui o script de cadastro de residen
         </div>
         <div class="card-body mt-5">
             <?php
-            // Exibe mensagens de sucesso ou erro
             if (isset($cadastro_sucesso)) {
                 echo "<div class='alert alert-success' role='alert'>Residente cadastrado com sucesso!</div>";
             }
@@ -112,4 +111,3 @@ include_once "cadastrarResidente.php"; // Inclui o script de cadastro de residen
 </main>
 
 <?php include_once "footer.php"; ?>
-

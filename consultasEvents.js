@@ -1,4 +1,3 @@
-// Verifica se os elementos existem antes de adicionar eventos
 document.querySelectorAll('.editable-row').forEach(row => {
     if (row) {
         row.addEventListener('click', () => {
@@ -20,13 +19,11 @@ document.querySelectorAll('.editable-row').forEach(row => {
     }
 });
 
-// Reseta o formulário para "create" ao recarregar a página
 document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('form-action').value = 'create';
     document.getElementById('submit-button').textContent = 'Cadastrar Consulta';
 });
 
-// Verifica se o botão "Criar Novo" existe antes de adicionar o evento
 const newButton = document.getElementById('new-button');
 if (newButton) {
     newButton.addEventListener('click', () => {
@@ -47,7 +44,6 @@ if (newButton) {
     });
 }
 
-// Validação do formulário antes do envio
 document.querySelector('form').addEventListener('submit', (event) => {
     const requiredFields = ['resident_id', 'data_consulta', 'medico'];
     let isValid = true;
@@ -56,14 +52,14 @@ document.querySelector('form').addEventListener('submit', (event) => {
         const field = document.getElementById(fieldId);
         if (!field.value.trim()) {
             isValid = false;
-            field.classList.add('is-invalid'); // Adiciona uma classe para destacar o erro
+            field.classList.add('is-invalid');
         } else {
-            field.classList.remove('is-invalid'); // Remove a classe caso o campo esteja preenchido
+            field.classList.remove('is-invalid');
         }
     });
 
     if (!isValid) {
-        event.preventDefault(); // Impede o envio do formulário
+        event.preventDefault();
         alert('Por favor, preencha todos os campos obrigatórios.');
     }
 });

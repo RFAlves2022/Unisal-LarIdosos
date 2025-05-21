@@ -42,7 +42,6 @@ include_once "adminQuerys.php";
                                                     </div>
                                                 </td>
                                                 <td>
-                                                    <!-- Botão Deletar -->
                                                     <form action="adminConfig.php" method="POST">
                                                         <input type="hidden" name="delete_user_id" value="<?= $user['id'] ?>">
                                                         <button type="submit" class="btn btn-sm btn-danger" style="width: 150px;" onclick="return confirm('Tem certeza que deseja deletar este usuário?')">Deletar</button>
@@ -58,9 +57,7 @@ include_once "adminQuerys.php";
                                 </tbody>
                             </table>
                         </div>
-
-                        <!-- Formulário para cadastrar novo usuário -->
-                         <hr>
+                        <hr>
                         <div class="mt-4">
                             <h5 class="text-center">Cadastrar Novo Usuário</h5>
                             <form action="adminConfig.php" method="POST" class="d-flex justify-content-center align-items-center  gap-3 ">
@@ -70,7 +67,7 @@ include_once "adminQuerys.php";
                                 <div class="input-group" style="width: auto;">
                                     <input type="password" class="form-control form-control-sm" id="new_password" name="new_password" placeholder="Senha" required>
                                 </div>
-                                <button type="submit" class="btn btn-sm btn-primary" style="background-color: #5D737E";">Cadastrar</button>
+                                <button type="submit" class="btn btn-sm btn-primary" style="background-color: #5D737E" ;">Cadastrar</button>
                             </form>
                         </div>
                     </div>

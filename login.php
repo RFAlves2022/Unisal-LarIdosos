@@ -1,7 +1,7 @@
 <?php
-include_once "dbConnection.php"; // Inclui a conexão com o banco
-session_start(); // Inicia a sessão
-require_once "loginValidation.php"; // Inclui a validação de login
+include_once "dbConnection.php";
+session_start();
+require_once "loginValidation.php";
 ?>
 
 

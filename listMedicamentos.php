@@ -1,6 +1,6 @@
 <?php
 include_once "header.php";
-include_once "dbConnection.php"; // Inclui a conexão com o banco de dados
+include_once "dbConnection.php"; 
 $search = $_GET['search'] ?? '';
 require "medQuerys.php";
 ?>
@@ -70,7 +70,7 @@ require "medQuerys.php";
                 </table>
             </div>
 
-            <!-- Formulário para cadastrar ou editar medicamento -->
+            <!-- Formulário medicamento -->
             <div class="mt-4">
                 <h4 class="text-center color1">Gerenciar Medicamento</h4>
                 <form method="POST" class="mt-3">

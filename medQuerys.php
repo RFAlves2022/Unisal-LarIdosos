@@ -112,10 +112,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             }
         } catch (Exception $e) {
             $_SESSION['error'] = 'Ocorreu um erro: ' . $e->getMessage();
-            error_log($e->getMessage()); // Adiciona o erro ao log do servidor
+            error_log($e->getMessage());
         }
 
-        // Redireciona para evitar reenvio do formulário
         header("Location: listMedicamentos.php");
         exit;
     }

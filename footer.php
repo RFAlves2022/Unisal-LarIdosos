@@ -5,10 +5,9 @@
     </div>
 </footer>
 
-<!-- Scripts do Bootstrap -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 <script>
-// Mostrar o footer ao rolar para baixo, esconder ao rolar para cima
+
 let lastScroll = window.scrollY;
 let footer = document.getElementById('main-footer');
 let ticking = false;
@@ -18,10 +17,10 @@ window.addEventListener('scroll', function() {
         window.requestAnimationFrame(function() {
             let currentScroll = window.scrollY;
             if (currentScroll > lastScroll && currentScroll > 50) {
-                // Scroll para baixo: mostra o footer
+                // Scroll para baixo
                 footer.style.bottom = "0";
             } else {
-                // Scroll para cima: esconde o footer
+                // Scroll para cima
                 footer.style.bottom = "-60px";
             }
             lastScroll = currentScroll;
@@ -31,7 +30,7 @@ window.addEventListener('scroll', function() {
     }
 });
 
-// Esconde o footer inicialmente
+// Esconde o footer 
 footer.style.bottom = "-60px";
 </script>
 </body>
