@@ -60,7 +60,7 @@ include_once "adminQuerys.php";
                         <hr>
                         <div class="mt-4">
                             <h5 class="text-center">Cadastrar Novo Usuário</h5>
-                            <form action="adminQuerys.php" method="POST" class="d-flex justify-content-center align-items-center  gap-3 ">
+                            <form action="adminConfig.php" method="POST" class="d-flex justify-content-center align-items-center  gap-3 ">
                                 <div class="input-group" style="width: auto;">
                                     <input type="text" class="form-control form-control-sm" id="new_username" name="new_username" placeholder="Nome de Usuário" required>
                                 </div>
